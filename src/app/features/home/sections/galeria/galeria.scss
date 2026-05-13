@@ -1,0 +1,396 @@
+@use '../../../../../styles' as t;
+@use 'sass:color';
+
+.galeria {
+  background: t.$color-bg-alt;
+  padding: t.$spacing-xl t.$spacing-sm;
+
+  @media (min-width: t.$bp-tablet) {
+    padding: t.$spacing-2xl t.$spacing-sm;
+  }
+
+  // ── Filtros ──────────────────────────────────────────────────
+  &__filtros {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: t.$spacing-xs;
+    margin-bottom: t.$spacing-lg;
+
+    @media (min-width: t.$bp-tablet) {
+      gap: 12px;
+      margin-bottom: t.$spacing-xl;
+    }
+  }
+
+  &__filtro-btn {
+    font-family: t.$font-body;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: t.$color-text-secondary;
+    background: t.$color-bg-white;
+    border: 1.5px solid t.$color-border;
+    border-radius: t.$radius-full;
+    padding: 10px 22px;
+    cursor: pointer;
+    transition:
+      background-color t.$transition-base,
+      color t.$transition-base,
+      border-color t.$transition-base,
+      box-shadow t.$transition-base,
+      transform t.$transition-base;
+
+    &:hover:not(&--ativo) {
+      border-color: t.$color-primary-light;
+      color: t.$color-primary;
+      background: rgba(t.$color-primary, 0.04);
+    }
+
+    &--ativo {
+      background: t.$color-primary;
+      border-color: t.$color-primary;
+      color: #fff;
+      box-shadow: 0 4px 14px rgba(t.$color-primary, 0.3);
+
+      &:hover {
+        background: t.$color-primary-dark;
+        border-color: t.$color-primary-dark;
+      }
+    }
+  }
+
+  // ── Grid masonry ─────────────────────────────────────────────
+  &__grid {
+    columns: 1;
+    column-gap: 16px;
+
+    @media (min-width: t.$bp-mobile) {
+      columns: 2;
+    }
+
+    @media (min-width: t.$bp-tablet) {
+      columns: 3;
+      column-gap: 20px;
+    }
+
+    @media (min-width: t.$bp-desktop) {
+      columns: 4;
+      column-gap: 20px;
+    }
+  }
+
+  &__item {
+    break-inside: avoid;
+    margin-bottom: 16px;
+    animation: galeriaEntrada 0.45s t.$transition-smooth both;
+
+    @media (min-width: t.$bp-tablet) {
+      margin-bottom: 20px;
+    }
+  }
+
+  &__figura {
+    position: relative;
+    overflow: hidden;
+    border-radius: t.$radius-sm;
+    box-shadow: t.$shadow-card;
+    margin: 0;
+    cursor: pointer;
+    transition: box-shadow t.$transition-smooth;
+    display: block;
+    outline: none;
+
+    &:hover,
+    &:focus-visible {
+      box-shadow: t.$shadow-card-hover;
+
+      .galeria__imagem {
+        transform: scale(1.05);
+      }
+
+      .galeria__overlay {
+        opacity: 1;
+      }
+
+      .galeria__lupa {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    &:focus-visible {
+      outline: 3px solid t.$color-primary;
+      outline-offset: 2px;
+    }
+  }
+
+  &__imagem {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    object-fit: cover;
+  }
+
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to top,
+      rgba(t.$color-primary-dark, 0.72) 0%,
+      rgba(t.$color-primary, 0.25) 50%,
+      transparent 100%
+    );
+    opacity: 0;
+    transition: opacity t.$transition-smooth;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: t.$spacing-sm;
+  }
+
+  &__categoria-label {
+    font-family: t.$font-body;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #fff;
+    background: rgba(#fff, 0.15);
+    backdrop-filter: blur(4px);
+    padding: 5px 12px;
+    border-radius: t.$radius-full;
+    border: 1px solid rgba(#fff, 0.3);
+  }
+
+  &__lupa {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(#fff, 0.2);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(#fff, 0.35);
+    color: #fff;
+    opacity: 0;
+    transform: translateY(6px) scale(0.9);
+    transition:
+      opacity t.$transition-smooth,
+      transform t.$transition-smooth;
+    flex-shrink: 0;
+  }
+
+  // ── CTA final ─────────────────────────────────────────────────
+  &__cta {
+    display: flex;
+    justify-content: center;
+    margin-top: t.$spacing-lg;
+
+    @media (min-width: t.$bp-tablet) {
+      margin-top: t.$spacing-xl;
+    }
+  }
+
+  &__cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: t.$font-body;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    color: #fff;
+    background: t.$color-whatsapp;
+    border-radius: t.$radius-full;
+    padding: 16px 36px;
+    box-shadow: 0 6px 20px rgba(t.$color-whatsapp, 0.35);
+    transition:
+      background-color t.$transition-base,
+      box-shadow t.$transition-base,
+      transform t.$transition-base;
+
+    &:hover {
+      background: color.adjust(t.$color-whatsapp, $lightness: -6%);
+      box-shadow: 0 10px 28px rgba(t.$color-whatsapp, 0.45);
+      transform: translateY(-2px);
+    }
+
+    svg {
+      flex-shrink: 0;
+    }
+  }
+
+  // ── Lightbox ──────────────────────────────────────────────────
+  &__lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 9000;
+    background: rgba(0, 0, 0, 0.92);
+    backdrop-filter: blur(2px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: t.$spacing-sm;
+    animation: lightboxEntrada 0.25s ease both;
+  }
+
+  &__lightbox-conteudo {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    max-width: 90vw;
+    animation: lightboxConteudoEntrada 0.3s 0.05s cubic-bezier(0.4, 0, 0.2, 1) both;
+  }
+
+  &__lightbox-imagem {
+    display: block;
+    max-height: 82vh;
+    max-width: 90vw;
+    width: auto;
+    height: auto;
+    border-radius: t.$radius-sm;
+    box-shadow:
+      0 24px 60px rgba(0, 0, 0, 0.6),
+      0 0 0 1px rgba(255, 255, 255, 0.08);
+    object-fit: contain;
+  }
+
+  &__lightbox-legenda {
+    font-family: t.$font-body;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.75);
+    text-align: center;
+    line-height: 1.5;
+    margin: 0;
+    max-width: 480px;
+  }
+
+  &__lightbox-legenda-cat {
+    display: inline-block;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: t.$color-primary-light;
+    margin-right: 6px;
+    font-size: 11px;
+
+    &::after {
+      content: ' —';
+    }
+  }
+
+  &__lightbox-fechar {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9001;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+    cursor: pointer;
+    transition:
+      background-color t.$transition-base,
+      transform t.$transition-base;
+
+    &:hover {
+      background: rgba(t.$color-primary, 0.6);
+      transform: scale(1.08);
+    }
+
+    &:focus-visible {
+      outline: 2px solid t.$color-primary;
+      outline-offset: 2px;
+    }
+  }
+
+  &__lightbox-nav {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 9001;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+    cursor: pointer;
+    transition:
+      background-color t.$transition-base,
+      transform t.$transition-base;
+
+    &--prev {
+      left: 16px;
+
+      @media (min-width: t.$bp-tablet) {
+        left: 28px;
+      }
+    }
+
+    &--next {
+      right: 16px;
+
+      @media (min-width: t.$bp-tablet) {
+        right: 28px;
+      }
+    }
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.22);
+      transform: translateY(-50%) scale(1.08);
+    }
+
+    &:focus-visible {
+      outline: 2px solid t.$color-primary;
+      outline-offset: 2px;
+    }
+  }
+}
+
+// ── Animações ─────────────────────────────────────────────────
+@keyframes galeriaEntrada {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes lightboxEntrada {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes lightboxConteudoEntrada {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

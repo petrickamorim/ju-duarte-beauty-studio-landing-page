@@ -1,0 +1,134 @@
+<section class="galeria" aria-labelledby="galeria-titulo">
+  <div class="container">
+    <app-section-header
+      eyebrow="Nosso Portfólio"
+      title="Resultados Reais"
+      subtitle="Cada detalhe pensado para valorizar sua beleza com sofisticação e delicadeza."
+      [centered]="true"
+    />
+
+    <nav class="galeria__filtros" aria-label="Filtrar por categoria">
+      @for (cat of categorias; track cat) {
+        <button
+          class="galeria__filtro-btn"
+          [class.galeria__filtro-btn--ativo]="categoriaAtiva() === cat"
+          (click)="selecionarCategoria(cat)"
+          [attr.aria-pressed]="categoriaAtiva() === cat"
+          type="button"
+        >
+          {{ cat }}
+        </button>
+      }
+    </nav>
+
+    <div class="galeria__grid" role="list" aria-label="Fotos da galeria">
+      @for (foto of fotosFiltradas(); track foto.seed; let i = $index) {
+        <article class="galeria__item" role="listitem">
+          <figure
+            class="galeria__figura"
+            (click)="abrirLightbox(foto, i)"
+            (keydown.enter)="abrirLightbox(foto, i)"
+            (keydown.space)="abrirLightbox(foto, i)"
+            tabindex="0"
+            role="button"
+            [attr.aria-label]="'Ampliar foto: ' + foto.alt"
+          >
+            <img
+              [src]="imagemUrl(foto.seed, foto.largura, foto.altura)"
+              [alt]="foto.alt"
+              class="galeria__imagem"
+              loading="lazy"
+              width="400"
+              [attr.height]="foto.altura"
+            />
+            <figcaption class="galeria__overlay" aria-hidden="true">
+              <span class="galeria__categoria-label">{{ foto.categoria }}</span>
+              <span class="galeria__lupa" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22">
+                  <circle cx="11" cy="11" r="8"/>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                  <line x1="11" y1="8" x2="11" y2="14"/>
+                  <line x1="8" y1="11" x2="14" y2="11"/>
+                </svg>
+              </span>
+            </figcaption>
+          </figure>
+        </article>
+      }
+    </div>
+
+    <div class="galeria__cta">
+      <a
+        [href]="whatsappUrl + '?text=' + whatsappMessage"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="galeria__cta-btn"
+        aria-label="Agendar horário pelo WhatsApp"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20" aria-hidden="true" focusable="false">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+          <path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.117 1.523 5.847L.057 23.5l5.797-1.522A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.869 0-3.618-.487-5.136-1.338l-.368-.218-3.441.902.918-3.352-.24-.386A9.944 9.944 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+        </svg>
+        Agende Seu Horário
+      </a>
+    </div>
+  </div>
+</section>
+
+@if (lightboxAberto()) {
+  <div
+    class="galeria__lightbox"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Visualizar foto"
+    (click)="fecharLightbox()"
+  >
+    <button
+      class="galeria__lightbox-fechar"
+      (click)="fecharLightbox()"
+      type="button"
+      aria-label="Fechar visualização"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" width="20" height="20" aria-hidden="true">
+        <line x1="18" y1="6" x2="6" y2="18"/>
+        <line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </button>
+
+    <button
+      class="galeria__lightbox-nav galeria__lightbox-nav--prev"
+      (click)="$event.stopPropagation(); navegarLightbox(-1)"
+      type="button"
+      aria-label="Foto anterior"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="22" height="22" aria-hidden="true">
+        <polyline points="15 18 9 12 15 6"/>
+      </svg>
+    </button>
+
+    <div class="galeria__lightbox-conteudo" (click)="$event.stopPropagation()">
+      @if (fotoAtiva(); as foto) {
+        <img
+          [src]="imagemUrlLightbox(foto.seed)"
+          [alt]="foto.alt"
+          class="galeria__lightbox-imagem"
+        />
+        <p class="galeria__lightbox-legenda">
+          <span class="galeria__lightbox-legenda-cat">{{ foto.categoria }}</span>
+          {{ foto.alt }}
+        </p>
+      }
+    </div>
+
+    <button
+      class="galeria__lightbox-nav galeria__lightbox-nav--next"
+      (click)="$event.stopPropagation(); navegarLightbox(1)"
+      type="button"
+      aria-label="Próxima foto"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="22" height="22" aria-hidden="true">
+        <polyline points="9 18 15 12 9 6"/>
+      </svg>
+    </button>
+  </div>
+}

@@ -16,6 +16,20 @@ Sua responsabilidade é definir:
 
 ---
 
+# Leitura Obrigatória do CLAUDE.md
+
+Antes de definir qualquer arquitetura ou refatoração, você deve sempre ler o arquivo `.claude/CLAUDE.md`.
+
+Todas as decisões arquiteturais devem seguir:
+- padrões do projeto
+- identidade visual
+- stack definida
+- convenções Angular
+- objetivos de performance
+- objetivos de SEO
+
+---
+
 # Contexto do Projeto
 
 O projeto é um site premium para um studio de beleza.

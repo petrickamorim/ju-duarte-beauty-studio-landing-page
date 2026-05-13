@@ -1,0 +1,248 @@
+@use '../../../../../styles' as t;
+
+.antes-depois {
+  background: t.$color-bg-main;
+  padding: t.$spacing-xl t.$spacing-sm;
+  overflow: hidden;
+
+  @media (min-width: t.$bp-tablet) {
+    padding: t.$spacing-2xl t.$spacing-sm;
+  }
+
+  // ── Grid de cards ─────────────────────────────────────────────
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: t.$spacing-lg;
+    margin-bottom: t.$spacing-xl;
+
+    @media (min-width: t.$bp-tablet) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (min-width: t.$bp-desktop) {
+      grid-template-columns: repeat(3, 1fr);
+      gap: t.$spacing-md;
+    }
+  }
+
+  // ── Card ─────────────────────────────────────────────────────
+  &__card {
+    background: t.$color-bg-white;
+    border-radius: t.$radius-md;
+    box-shadow: t.$shadow-card;
+    overflow: hidden;
+    transition:
+      box-shadow t.$transition-smooth,
+      transform t.$transition-smooth;
+
+    &:hover {
+      box-shadow: t.$shadow-card-hover;
+      transform: translateY(-4px);
+    }
+  }
+
+  // ── Slider container ──────────────────────────────────────────
+  &__slider-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: t.$radius-sm t.$radius-sm 0 0;
+    cursor: col-resize;
+    user-select: none;
+    touch-action: none;
+    height: 280px;
+
+    @media (min-width: t.$bp-tablet) {
+      height: 360px;
+    }
+
+    @media (min-width: t.$bp-desktop) {
+      height: 420px;
+    }
+
+    &--arrastando {
+      cursor: col-resize;
+    }
+  }
+
+  // ── Imagem Depois (base, ocupa todo o espaço) ─────────────────
+  &__imagem-depois {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    pointer-events: none;
+  }
+
+  // ── Wrapper da imagem Antes (largura controlada pelo slider) ──
+  &__antes-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    overflow: hidden;
+    // Transição leve apenas quando não está arrastando (snap inicial)
+    // JS remove a classe --arrastando e a transition entra em ação só no estado final
+    pointer-events: none;
+  }
+
+  // ── Imagem Antes (dentro do wrapper, mesmas dimensões) ────────
+  &__imagem-antes {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw; // Garante que a imagem não encolhe com o wrapper
+    max-width: 600px;
+    height: 100%;
+    object-fit: cover;
+    object-position: left center;
+    display: block;
+    pointer-events: none;
+  }
+
+  // ── Linha divisora ────────────────────────────────────────────
+  &__divisor-linha {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow:
+      0 0 8px rgba(0, 0, 0, 0.35),
+      0 0 0 1px rgba(0, 0, 0, 0.1);
+    transform: translateX(-50%);
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  // ── Handle arrastável ─────────────────────────────────────────
+  &__handle {
+    position: absolute;
+    top: 50%;
+    z-index: 3;
+    transform: translate(-50%, -50%);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #fff;
+    border: none;
+    box-shadow:
+      0 4px 16px rgba(0, 0, 0, 0.22),
+      0 0 0 2px rgba(255, 255, 255, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    cursor: col-resize;
+    padding: 0;
+    color: t.$color-text-secondary;
+    transition: box-shadow t.$transition-base, transform t.$transition-base;
+
+    &:hover,
+    &:focus-visible {
+      box-shadow:
+        0 6px 20px rgba(t.$color-primary, 0.3),
+        0 0 0 3px t.$color-primary;
+      color: t.$color-primary;
+      transform: translate(-50%, -50%) scale(1.08);
+    }
+
+    &:focus-visible {
+      outline: none;
+    }
+
+    svg {
+      flex-shrink: 0;
+    }
+  }
+
+  // ── Labels Antes / Depois ─────────────────────────────────────
+  &__label {
+    position: absolute;
+    top: 14px;
+    font-family: t.$font-body;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border-radius: t.$radius-full;
+    z-index: 4;
+    pointer-events: none;
+
+    &--antes {
+      left: 12px;
+      color: t.$color-text-secondary;
+      background: rgba(t.$color-bg-white, 0.92);
+      border: 1px solid t.$color-border;
+    }
+
+    &--depois {
+      right: 12px;
+      color: #fff;
+      background: t.$color-primary;
+      box-shadow: 0 3px 10px rgba(t.$color-primary, 0.35);
+    }
+  }
+
+  // ── Info (rodapé do card) ─────────────────────────────────────
+  &__info {
+    padding: t.$spacing-sm t.$spacing-md;
+    text-align: center;
+    border-top: 1px solid t.$color-border;
+
+    @media (min-width: t.$bp-tablet) {
+      padding: t.$spacing-md;
+    }
+  }
+
+  &__titulo {
+    font-family: t.$font-title;
+    font-size: 18px;
+    font-weight: 600;
+    color: t.$color-text-main;
+    margin-bottom: 4px;
+
+    @media (min-width: t.$bp-tablet) {
+      font-size: 20px;
+    }
+  }
+
+  &__servico {
+    font-family: t.$font-body;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: t.$color-primary;
+    margin: 0;
+  }
+
+  // ── CTA final ─────────────────────────────────────────────────
+  &__cta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: t.$spacing-md;
+    text-align: center;
+    padding-top: t.$spacing-md;
+
+    @media (min-width: t.$bp-tablet) {
+      flex-direction: row;
+      justify-content: center;
+      gap: t.$spacing-lg;
+      text-align: left;
+    }
+  }
+
+  &__cta-texto {
+    font-family: t.$font-body;
+    font-size: 15px;
+    color: t.$color-text-secondary;
+    line-height: 1.5;
+    max-width: 340px;
+    margin: 0;
+  }
+}

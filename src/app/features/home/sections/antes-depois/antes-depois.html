@@ -1,0 +1,103 @@
+<section class="antes-depois" aria-labelledby="antes-depois-titulo">
+  <div class="container">
+    <app-section-header
+      eyebrow="Transformações Reais"
+      title="Antes &amp; Depois"
+      subtitle="Resultados que valorizam a beleza natural de cada cliente."
+      [centered]="true"
+    />
+
+    <div class="antes-depois__grid">
+      @for (item of transformacoes; track item.titulo; let i = $index) {
+        <article
+          class="antes-depois__card"
+          [attr.aria-label]="'Transformação: ' + item.titulo"
+        >
+          <div
+            class="antes-depois__slider-container"
+            [class.antes-depois__slider-container--arrastando]="arrastando() === i"
+            role="img"
+            [attr.aria-label]="'Comparação antes e depois: ' + item.titulo"
+          >
+            <!-- Imagem Depois (base, full width) -->
+            <img
+              [src]="imagemUrl(item.seedDepois)"
+              [alt]="item.altDepois"
+              class="antes-depois__imagem-depois"
+              loading="lazy"
+              width="600"
+              height="420"
+              draggable="false"
+            />
+
+            <!-- Imagem Antes (sobreposta, clip por posição) -->
+            <div
+              class="antes-depois__antes-wrapper"
+              [style.width.%]="getPosicao(i)"
+            >
+              <img
+                [src]="imagemUrl(item.seedAntes)"
+                [alt]="item.altAntes"
+                class="antes-depois__imagem-antes"
+                loading="lazy"
+                width="600"
+                height="420"
+                draggable="false"
+              />
+            </div>
+
+            <!-- Linha divisora -->
+            <div
+              class="antes-depois__divisor-linha"
+              [style.left.%]="getPosicao(i)"
+              aria-hidden="true"
+            ></div>
+
+            <!-- Handle arrastável -->
+            <button
+              class="antes-depois__handle"
+              [style.left.%]="getPosicao(i)"
+              (mousedown)="iniciarDrag($event, i)"
+              (touchstart)="iniciarDrag($event, i)"
+              type="button"
+              aria-label="Arraste para comparar antes e depois"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true">
+                <polyline points="15 18 9 12 15 6"/>
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true">
+                <polyline points="9 18 15 12 9 6"/>
+              </svg>
+            </button>
+
+            <!-- Label Antes -->
+            <span class="antes-depois__label antes-depois__label--antes" aria-hidden="true">
+              Antes
+            </span>
+
+            <!-- Label Depois -->
+            <span class="antes-depois__label antes-depois__label--depois" aria-hidden="true">
+              Depois
+            </span>
+          </div>
+
+          <footer class="antes-depois__info">
+            <h3 class="antes-depois__titulo">{{ item.titulo }}</h3>
+            <p class="antes-depois__servico">{{ item.servico }}</p>
+          </footer>
+        </article>
+      }
+    </div>
+
+    <div class="antes-depois__cta">
+      <p class="antes-depois__cta-texto">
+        Quer sua própria transformação? Agende agora pelo WhatsApp.
+      </p>
+      <app-whatsapp-button
+        [href]="whatsappUrl + '?text=Ol%C3%A1%2C%20vi%20as%20transforma%C3%A7%C3%B5es%20e%20gostaria%20de%20agendar!'"
+        label="Quero Me Transformar"
+        ariaLabel="Agendar transformação pelo WhatsApp"
+      />
+    </div>
+  </div>
+</section>

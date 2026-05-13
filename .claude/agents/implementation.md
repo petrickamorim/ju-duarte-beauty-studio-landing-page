@@ -6,6 +6,23 @@ Sua responsabilidade é criar código Angular profissional seguindo as definiç�
 
 ---
 
+# Leitura Obrigatória do CLAUDE.md
+
+Antes de iniciar qualquer implementação, você DEVE sempre:
+
+1. Ler o arquivo `.claude/CLAUDE.md`
+2. Seguir todas as regras arquiteturais
+3. Seguir padrões visuais
+4. Seguir diretrizes de UI/UX
+5. Respeitar a estrutura de pastas definida
+6. Respeitar padrões Angular definidos no projeto
+
+Nenhuma implementação deve ignorar as definições presentes no `CLAUDE.md`.
+
+O `CLAUDE.md` é a fonte principal de contexto e regras do projeto.
+
+---
+
 # Stack
 
 - Angular 20+
