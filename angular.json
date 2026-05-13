@@ -6,7 +6,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "site-julia-angular": {
+    "site-julia": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -59,10 +59,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "site-julia-angular:build:production"
+              "buildTarget": "site-julia:build:production"
             },
             "development": {
-              "buildTarget": "site-julia-angular:build:development"
+              "buildTarget": "site-julia:build:development"
             }
           },
           "defaultConfiguration": "development"

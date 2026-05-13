@@ -13,6 +13,7 @@ import { ServiceItem } from '../../models/service.model';
 export class ServicesComponent {
   readonly services = signal<ServiceItem[]>([
     {
+      slug: 'maquiagem',
       name: 'Maquiagem',
       icon: '💄',
       description:
@@ -25,16 +26,7 @@ export class ServicesComponent {
       ],
     },
     {
-      name: 'Penteado',
-      icon: '💇‍♀️',
-      description: 'Penteados para eventos, noivas, madrinhas e ocasiões especiais.',
-      highlights: [
-        'Penteados sociais e para festas',
-        'Produções completas para noivas',
-        'Técnicas modernas e clássicas',
-      ],
-    },
-    {
+      slug: 'noivas',
       name: 'Noivas',
       icon: '👰',
       description:
@@ -47,6 +39,18 @@ export class ServicesComponent {
       ],
     },
     {
+      slug: 'penteado',
+      name: 'Penteado',
+      icon: '💇‍♀️',
+      description: 'Penteados para eventos, noivas, madrinhas e ocasiões especiais.',
+      highlights: [
+        'Penteados sociais e para festas',
+        'Produções completas para noivas',
+        'Técnicas modernas e clássicas',
+      ],
+    },
+    {
+      slug: 'unhas-em-gel',
       name: 'Unhas em Gel',
       icon: '💅',
       description: 'Procedimentos com acabamento delicado, moderno e resistente.',

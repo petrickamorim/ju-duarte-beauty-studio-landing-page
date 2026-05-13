@@ -12,6 +12,8 @@
     display: grid;
     gap: 18px;
     grid-template-columns: 1fr;
+    opacity: 1;
+    transition: opacity 350ms ease;
 
     @media (min-width: t.$bp-mobile) {
       grid-template-columns: repeat(2, 1fr);
@@ -24,15 +26,50 @@
     @media (min-width: t.$bp-desktop) {
       grid-template-columns: repeat(4, 1fr);
     }
+
+    &--saindo {
+      opacity: 0;
+    }
+  }
+
+  &__dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: t.$spacing-lg;
+  }
+
+  &__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: t.$color-border;
+    cursor: pointer;
+    border: none;
+    padding: 0;
+    transition:
+      background-color t.$transition-base,
+      transform t.$transition-base,
+      width t.$transition-base;
+
+    &--ativo {
+      background: t.$color-primary;
+      width: 24px;
+      border-radius: 4px;
+    }
+
+    &:hover:not(&--ativo) {
+      background: t.$color-primary-light;
+    }
   }
 
   &__summary {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 12px;
+    gap: 10px;
     margin-top: t.$spacing-lg;
-    padding: 16px 28px;
+    padding: 14px 28px;
     background: t.$color-bg-white;
     border-radius: t.$radius-full;
     border: 1px solid t.$color-border;
@@ -41,7 +78,7 @@
   }
 
   &__rating {
-    font-size: 18px;
+    font-size: 17px;
     font-weight: 700;
     color: t.$color-text-main;
   }

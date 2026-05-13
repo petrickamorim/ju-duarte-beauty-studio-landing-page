@@ -64,4 +64,28 @@
       background: t.$color-primary;
     }
   }
+
+  &__cta {
+    display: inline-block;
+    margin-top: t.$spacing-md;
+    padding: 10px 24px;
+    border-radius: t.$radius-full;
+    border: 2px solid t.$color-primary;
+    color: t.$color-primary;
+    font-family: t.$font-body;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-align: center;
+    transition:
+      background-color t.$transition-base,
+      color t.$transition-base;
+    align-self: flex-start;
+
+    &:hover,
+    &:focus-visible {
+      background-color: t.$color-primary;
+      color: t.$color-bg-white;
+    }
+  }
 }

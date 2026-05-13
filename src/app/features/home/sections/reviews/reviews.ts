@@ -1,7 +1,11 @@
-import { Component, signal } from '@angular/core';
+import { Component, computed, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import { ReviewCardComponent } from '../../components/review-card/review-card';
 import { SectionHeaderComponent } from '../../../../shared/components/section-header/section-header';
-import { Review } from '../../models/review.model';
+import { AVALIACOES } from '../../../../core/dados/avaliacoes.dados';
+
+const POR_PAGINA = 8;
+const DURACAO_MS = 25_000;
+const FADE_MS = 350;
 
 @Component({
   selector: 'app-reviews',
@@ -10,42 +14,45 @@ import { Review } from '../../models/review.model';
   templateUrl: './reviews.html',
   styleUrl: './reviews.scss',
 })
-export class ReviewsComponent {
-  readonly reviews = signal<Review[]>([
-    {
-      author: 'Rosangela Simões',
-      text: 'A profissional mais dedicada, detalhista e impecável. Não troco por nada!',
-      rating: 5,
-    },
-    {
-      author: 'Mariana Ferreira',
-      text: 'Profissional maravilhosa, muito cuidadosa e talentosa. Minhas unhas ficaram exatamente como eu queria!',
-      rating: 5,
-    },
-    {
-      author: 'Tatiane Campanher',
-      text: 'Simplesmente maravilhosa! Trabalho com muito profissionalismo e atenção aos detalhes.',
-      rating: 5,
-    },
-    {
-      author: 'Cristina Ravelli',
-      text: 'Extremamente caprichosa e muito carinhosa no atendimento. Minhas mãos ficam sempre lindas!',
-      rating: 5,
-    },
-    {
-      author: 'Paula Cris',
-      text: 'Amei fazer unha e cabelo, trabalham com muito profissionalismo e amor!',
-      rating: 5,
-    },
-    {
-      author: 'Caroline Psicóloga',
-      text: 'Além de excelente profissional, é uma fofa. Super recomendo!',
-      rating: 5,
-    },
-    {
-      author: 'Belinha Vinhas',
-      text: 'Maquiagens fantásticas, muito capricho e atenção em cada detalhe.',
-      rating: 5,
-    },
-  ]);
+export class ReviewsComponent implements OnInit {
+  private readonly destroyRef = inject(DestroyRef);
+
+  private readonly todas = AVALIACOES;
+  private readonly totalPaginas = Math.ceil(this.todas.length / POR_PAGINA);
+
+  readonly paginaAtual = signal(0);
+  readonly saindo = signal(false);
+
+  readonly visiveis = computed(() => {
+    const inicio = this.paginaAtual() * POR_PAGINA;
+    return this.todas.slice(inicio, inicio + POR_PAGINA);
+  });
+
+  readonly totalAvaliacoes = this.todas.length;
+
+  ngOnInit(): void {
+    const intervalo = setInterval(() => this.#avancar(), DURACAO_MS);
+    this.destroyRef.onDestroy(() => clearInterval(intervalo));
+  }
+
+  #avancar(): void {
+    this.saindo.set(true);
+    setTimeout(() => {
+      this.paginaAtual.update((p) => (p + 1) % this.totalPaginas);
+      this.saindo.set(false);
+    }, FADE_MS);
+  }
+
+  irParaPagina(indice: number): void {
+    if (indice === this.paginaAtual()) return;
+    this.saindo.set(true);
+    setTimeout(() => {
+      this.paginaAtual.set(indice);
+      this.saindo.set(false);
+    }, FADE_MS);
+  }
+
+  get paginas(): number[] {
+    return Array.from({ length: this.totalPaginas }, (_, i) => i);
+  }
 }

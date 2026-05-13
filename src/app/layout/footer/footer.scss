@@ -61,4 +61,15 @@
     width: 100%;
     text-align: center;
   }
+
+  &__dev {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.25);
+    text-align: center;
+
+    strong {
+      color: rgba(255, 255, 255, 0.4);
+      font-weight: 600;
+    }
+  }
 }

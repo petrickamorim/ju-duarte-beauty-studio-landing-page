@@ -1,9 +1,11 @@
 import { Component, input } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { ServiceItem } from '../../models/service.model';
 
 @Component({
   selector: 'app-service-card',
   standalone: true,
+  imports: [RouterLink],
   template: `
     <article class="service-card">
       <div class="service-card__icon" aria-hidden="true">{{ service().icon }}</div>
@@ -16,6 +18,13 @@ import { ServiceItem } from '../../models/service.model';
           }
         </ul>
       }
+      <a
+        class="service-card__cta"
+        [routerLink]="['/servicos', service().slug]"
+        [attr.aria-label]="'Saiba mais sobre ' + service().name"
+      >
+        Saiba mais
+      </a>
     </article>
   `,
   styleUrl: './service-card.scss',

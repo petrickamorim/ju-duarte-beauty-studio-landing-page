@@ -1,0 +1,124 @@
+@use '../../../../../styles' as t;
+
+.faq {
+  background: t.$color-bg-alt;
+  padding: t.$spacing-xl t.$spacing-sm;
+
+  @media (min-width: t.$bp-tablet) {
+    padding: t.$spacing-2xl t.$spacing-sm;
+  }
+
+  &__lista {
+    max-width: 720px;
+    margin: 0 auto t.$spacing-lg;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  &__item {
+    background: t.$color-bg-white;
+    border-radius: t.$radius-sm;
+    box-shadow: t.$shadow-card;
+    overflow: hidden;
+    border: 1.5px solid transparent;
+    transition: border-color t.$transition-base;
+
+    &--aberto {
+      border-color: t.$color-primary-light;
+    }
+  }
+
+  &__pergunta {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: t.$spacing-sm;
+    padding: 20px t.$spacing-md;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    font-family: t.$font-body;
+    font-size: 15px;
+    font-weight: 600;
+    color: t.$color-text-main;
+    transition: color t.$transition-base;
+
+    @media (min-width: t.$bp-tablet) {
+      font-size: 16px;
+      padding: 22px t.$spacing-md;
+    }
+
+    &:hover {
+      color: t.$color-primary;
+    }
+
+    .faq__item--aberto & {
+      color: t.$color-primary;
+    }
+  }
+
+  &__icone {
+    flex-shrink: 0;
+    color: t.$color-primary;
+    transition: transform t.$transition-smooth;
+
+    .faq__item--aberto & {
+      transform: rotate(180deg);
+    }
+  }
+
+  &__resposta {
+    padding: 0 t.$spacing-md t.$spacing-md;
+
+    &[hidden] {
+      display: none;
+    }
+  }
+
+  &__resposta-texto {
+    font-size: 15px;
+    line-height: 1.75;
+    color: t.$color-text-secondary;
+    border-top: 1px solid t.$color-border;
+    padding-top: t.$spacing-sm;
+  }
+
+  &__rodape {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: t.$spacing-sm;
+  }
+
+  &__rodape-texto {
+    font-family: t.$font-title;
+    font-size: 1.15rem;
+    color: t.$color-text-main;
+  }
+
+  &__whatsapp {
+    display: inline-flex;
+    align-items: center;
+    padding: 12px 32px;
+    border: 2px solid t.$color-primary;
+    border-radius: t.$radius-full;
+    color: t.$color-primary;
+    font-size: 15px;
+    font-weight: 700;
+    transition:
+      background-color t.$transition-base,
+      color t.$transition-base;
+
+    &:hover,
+    &:focus-visible {
+      background-color: t.$color-primary;
+      color: #fff;
+    }
+  }
+}

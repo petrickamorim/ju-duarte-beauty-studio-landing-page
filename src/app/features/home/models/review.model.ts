@@ -3,4 +3,5 @@ export interface Review {
   readonly text: string;
   readonly rating: number;
   readonly role?: string;
+  readonly date?: string;
 }
