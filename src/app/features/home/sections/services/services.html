@@ -1,0 +1,18 @@
+<section class="services-section" id="servicos" aria-labelledby="services-title">
+  <div class="container">
+    <app-section-header
+      eyebrow="O Que Oferecemos"
+      title="Nossos Serviços"
+      subtitle="Técnicas premium para realçar a sua beleza em cada ocasião especial."
+      id="services-title"
+    />
+
+    <div class="services-section__grid" role="list">
+      @for (service of services(); track service.name) {
+        <div role="listitem">
+          <app-service-card [service]="service" />
+        </div>
+      }
+    </div>
+  </div>
+</section>

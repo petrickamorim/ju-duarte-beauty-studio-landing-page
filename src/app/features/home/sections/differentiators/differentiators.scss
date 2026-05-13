@@ -1,0 +1,62 @@
+@use '../../../../../styles' as t;
+
+.diff-section {
+  background: linear-gradient(135deg, #fdf0f5 0%, t.$color-bg-alt 100%);
+  padding: t.$spacing-xl t.$spacing-sm;
+
+  @media (min-width: t.$bp-tablet) {
+    padding: t.$spacing-2xl t.$spacing-sm;
+  }
+
+  &__list {
+    display: grid;
+    gap: 16px;
+    grid-template-columns: 1fr;
+    margin-bottom: t.$spacing-lg;
+
+    @media (min-width: t.$bp-mobile) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (min-width: t.$bp-tablet) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 18px 22px;
+    background: t.$color-bg-white;
+    border-radius: t.$radius-md;
+    box-shadow: t.$shadow-card;
+    transition:
+      transform t.$transition-smooth,
+      box-shadow t.$transition-smooth;
+
+    &:hover {
+      transform: translateX(4px);
+      box-shadow: t.$shadow-card-hover;
+    }
+  }
+
+  &__icon {
+    font-size: 26px;
+    flex-shrink: 0;
+    line-height: 1;
+  }
+
+  &__text {
+    font-size: 15px;
+    font-weight: 600;
+    color: t.$color-text-main;
+    line-height: 1.4;
+  }
+
+  &__cta {
+    display: flex;
+    justify-content: center;
+    margin-top: t.$spacing-md;
+  }
+}

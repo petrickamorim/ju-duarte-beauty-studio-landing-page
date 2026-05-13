@@ -1,0 +1,46 @@
+@use 'sass:color';
+@use '../../../../styles' as t;
+
+.btn-whatsapp {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 28px;
+  background: t.$color-whatsapp;
+  color: #ffffff;
+  border-radius: t.$radius-full;
+  font-family: t.$font-body;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.01em;
+  box-shadow: t.$shadow-whatsapp;
+  transition:
+    transform t.$transition-base,
+    box-shadow t.$transition-base,
+    background t.$transition-base;
+  text-decoration: none;
+  white-space: nowrap;
+
+  &:hover,
+  &:focus-visible {
+    background: color.adjust(t.$color-whatsapp, $lightness: -6%);
+    transform: translateY(-2px);
+    box-shadow: 0 16px 32px t.$color-whatsapp-shadow;
+    outline: none;
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  &--full {
+    width: 100%;
+    max-width: 430px;
+  }
+
+  &__icon {
+    flex-shrink: 0;
+  }
+}

@@ -1,0 +1,42 @@
+@use '../../../../styles' as t;
+
+.section-header {
+  margin-bottom: t.$spacing-lg;
+
+  &--centered {
+    text-align: center;
+  }
+
+  &__eyebrow {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: t.$color-primary;
+    margin-bottom: t.$spacing-xs;
+  }
+
+  &__title {
+    font-family: t.$font-title;
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1.15;
+    color: t.$color-text-main;
+    margin-bottom: t.$spacing-sm;
+
+    @media (min-width: t.$bp-tablet) {
+      font-size: 42px;
+    }
+  }
+
+  &__subtitle {
+    font-size: 16px;
+    line-height: 1.7;
+    color: t.$color-text-secondary;
+    max-width: 600px;
+
+    .section-header--centered & {
+      margin: 0 auto;
+    }
+  }
+}

@@ -1,0 +1,114 @@
+@use 'sass:color';
+@use '../../../../../styles' as t;
+
+.contact-section {
+  background: t.$color-bg-alt;
+  padding: t.$spacing-xl t.$spacing-sm;
+
+  @media (min-width: t.$bp-tablet) {
+    padding: t.$spacing-2xl t.$spacing-sm;
+  }
+
+  &__card {
+    background: t.$color-bg-white;
+    border-radius: t.$radius-lg;
+    padding: t.$spacing-md;
+    box-shadow: t.$shadow-card;
+    max-width: 640px;
+    margin: 0 auto;
+
+    @media (min-width: t.$bp-tablet) {
+      padding: t.$spacing-xl;
+    }
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-bottom: 28px;
+  }
+
+  &__group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  &__group-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: t.$color-text-main;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  &__address {
+    font-style: normal;
+    font-size: 15px;
+    color: t.$color-text-secondary;
+    line-height: 1.6;
+  }
+
+  &__hours {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  &__hour-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    color: t.$color-text-secondary;
+
+    dt {
+      font-weight: 500;
+    }
+
+    dd {
+      text-align: right;
+    }
+  }
+
+  &__link {
+    font-size: 15px;
+    color: t.$color-primary;
+    font-weight: 600;
+    transition: color t.$transition-base;
+
+    &:hover {
+      color: t.$color-primary-dark;
+      text-decoration: underline;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    align-items: stretch;
+  }
+
+  &__maps-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    padding: 16px 24px;
+    background: #f1e7e4;
+    color: t.$color-text-main;
+    border-radius: t.$radius-full;
+    font-weight: 600;
+    font-size: 15px;
+    transition:
+      background t.$transition-base,
+      transform t.$transition-base;
+
+    &:hover {
+      background: color.adjust(#f1e7e4, $lightness: -5%);
+      transform: translateY(-1px);
+    }
+  }
+}

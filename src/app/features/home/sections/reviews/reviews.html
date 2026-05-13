@@ -1,0 +1,23 @@
+<section class="reviews-section" id="avaliacoes" aria-labelledby="reviews-title">
+  <div class="container">
+    <app-section-header
+      eyebrow="Clientes Felizes"
+      title="Avaliações Reais"
+      subtitle="Veja o que nossas clientes falam sobre a experiência no studio."
+      id="reviews-title"
+    />
+
+    <div class="reviews-section__grid" role="list" aria-label="Avaliações de clientes">
+      @for (review of reviews(); track review.author) {
+        <div role="listitem">
+          <app-review-card [review]="review" />
+        </div>
+      }
+    </div>
+
+    <div class="reviews-section__summary" aria-label="Resumo das avaliações">
+      <span class="reviews-section__rating">⭐ 5.0</span>
+      <span class="reviews-section__count">+47 avaliações no Google</span>
+    </div>
+  </div>
+</section>

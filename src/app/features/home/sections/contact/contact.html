@@ -1,0 +1,84 @@
+<section class="contact-section" id="contato" aria-labelledby="contact-title">
+  <div class="container">
+    <app-section-header
+      eyebrow="Onde Estamos"
+      title="Onde me encontrar"
+      subtitle="Venha nos visitar ou entre em contato pelo WhatsApp."
+      id="contact-title"
+    />
+
+    <div class="contact-section__card">
+      <div class="contact-section__info">
+
+        <!-- Endereço -->
+        <div class="contact-section__group">
+          <h3 class="contact-section__group-title">
+            <span aria-hidden="true">📍</span> Endereço
+          </h3>
+          <address class="contact-section__address">{{ address }}</address>
+        </div>
+
+        <!-- Horários -->
+        <div class="contact-section__group">
+          <h3 class="contact-section__group-title">
+            <span aria-hidden="true">⏰</span> Horários de Atendimento
+          </h3>
+          <dl class="contact-section__hours">
+            @for (hour of hours; track hour.days) {
+              <div class="contact-section__hour-row">
+                <dt>{{ hour.days }}</dt>
+                <dd>{{ hour.time }}</dd>
+              </div>
+            }
+          </dl>
+        </div>
+
+        <!-- Contatos -->
+        <div class="contact-section__group">
+          <h3 class="contact-section__group-title">
+            <span aria-hidden="true">📞</span> WhatsApp
+          </h3>
+          <a
+            [href]="whatsappUrl"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="contact-section__link"
+            aria-label="Entrar em contato pelo WhatsApp"
+          >{{ phone }}</a>
+        </div>
+
+        <div class="contact-section__group">
+          <h3 class="contact-section__group-title">
+            <span aria-hidden="true">📸</span> Instagram
+          </h3>
+          <a
+            [href]="instagramUrl"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="contact-section__link"
+            aria-label="Visitar perfil no Instagram"
+          >{{ instagramHandle }}</a>
+        </div>
+      </div>
+
+      <!-- CTAs -->
+      <div class="contact-section__actions">
+        <a
+          [href]="mapsUrl"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="contact-section__maps-btn"
+          aria-label="Ver como chegar ao studio no Google Maps"
+        >
+          <span aria-hidden="true">📍</span> Como Chegar
+        </a>
+
+        <app-whatsapp-button
+          [fullWidth]="true"
+          label="Agendar Meu Horário"
+          ariaLabel="Agendar horário pelo WhatsApp"
+        />
+      </div>
+    </div>
+  </div>
+</section>

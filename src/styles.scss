@@ -1,0 +1,152 @@
+// ============================================================
+// DESIGN TOKENS — Julia Duarte Beauty Studio
+// ============================================================
+
+// Cores
+$color-primary: #d57f9d;
+$color-primary-light: #f5c8bd;
+$color-primary-dark: #b8607f;
+
+$color-bg-main: #f8efe9;
+$color-bg-alt: #fffaf7;
+$color-bg-white: #ffffff;
+
+$color-text-main: #2d1d1a;
+$color-text-secondary: #6f5a57;
+$color-text-light: #a08880;
+
+$color-whatsapp: #25d366;
+$color-whatsapp-shadow: rgba(37, 211, 102, 0.35);
+
+$color-border: #ead8d2;
+$color-footer-bg: #2d1d1a;
+
+// Tipografia
+$font-title: 'Playfair Display', Georgia, serif;
+$font-body: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+
+// Espaçamento
+$spacing-xs: 8px;
+$spacing-sm: 16px;
+$spacing-md: 24px;
+$spacing-lg: 40px;
+$spacing-xl: 60px;
+$spacing-2xl: 90px;
+
+// Breakpoints
+$bp-mobile: 480px;
+$bp-tablet: 768px;
+$bp-desktop: 1024px;
+$bp-wide: 1280px;
+
+// Border radius
+$radius-sm: 12px;
+$radius-md: 24px;
+$radius-lg: 40px;
+$radius-full: 9999px;
+
+// Sombras
+$shadow-card: 0 8px 25px rgba(0, 0, 0, 0.06);
+$shadow-card-hover: 0 16px 40px rgba(0, 0, 0, 0.1);
+$shadow-whatsapp: 0 12px 25px $color-whatsapp-shadow;
+$shadow-floating: 0 10px 25px rgba(0, 0, 0, 0.22);
+
+// Transições
+$transition-base: 0.25s ease;
+$transition-smooth: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+
+// ============================================================
+// RESET & BASE
+// ============================================================
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: $font-body;
+  font-size: 16px;
+  line-height: 1.6;
+  color: $color-text-main;
+  background-color: $color-bg-main;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+// ============================================================
+// UTILITÁRIOS GLOBAIS
+// ============================================================
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 $spacing-sm;
+
+  @media (min-width: $bp-tablet) {
+    padding: 0 $spacing-lg;
+  }
+
+  @media (min-width: $bp-desktop) {
+    padding: 0 $spacing-xl;
+  }
+}
+
+.section-padding {
+  padding: $spacing-lg $spacing-sm;
+
+  @media (min-width: $bp-tablet) {
+    padding: $spacing-xl $spacing-sm;
+  }
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+// Focus visível para acessibilidade
+:focus-visible {
+  outline: 2px solid $color-primary;
+  outline-offset: 3px;
+  border-radius: 4px;
+}

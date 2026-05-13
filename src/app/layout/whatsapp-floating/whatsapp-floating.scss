@@ -1,0 +1,64 @@
+@use '../../../styles' as t;
+
+.whatsapp-floating {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 1000;
+  width: 62px;
+  height: 62px;
+  background: t.$color-whatsapp;
+  color: #ffffff;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: t.$shadow-floating;
+  transition:
+    transform t.$transition-smooth,
+    box-shadow t.$transition-smooth;
+
+  @media (min-width: t.$bp-tablet) {
+    width: 68px;
+    height: 68px;
+    right: 28px;
+    bottom: 28px;
+  }
+
+  &:hover,
+  &:focus-visible {
+    transform: scale(1.1);
+    box-shadow: 0 14px 35px rgba(0, 0, 0, 0.28);
+    outline: none;
+  }
+
+  &:active {
+    transform: scale(0.96);
+  }
+
+  // Pulso de atenção
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: t.$color-whatsapp;
+    animation: whatsapp-pulse 2.5s ease-out infinite;
+    z-index: -1;
+  }
+}
+
+@keyframes whatsapp-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  70% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}

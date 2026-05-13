@@ -1,0 +1,67 @@
+@use '../../../../../styles' as t;
+
+.service-card {
+  background: t.$color-bg-white;
+  padding: t.$spacing-md;
+  border-radius: t.$radius-md;
+  box-shadow: t.$shadow-card;
+  text-align: left;
+  transition:
+    transform t.$transition-smooth,
+    box-shadow t.$transition-smooth;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: t.$shadow-card-hover;
+  }
+
+  &__icon {
+    font-size: 36px;
+    margin-bottom: t.$spacing-sm;
+    line-height: 1;
+  }
+
+  &__title {
+    font-family: t.$font-title;
+    font-size: 22px;
+    font-weight: 700;
+    color: t.$color-text-main;
+    margin-bottom: 10px;
+  }
+
+  &__description {
+    font-size: 15px;
+    line-height: 1.65;
+    color: t.$color-text-secondary;
+    margin-bottom: 14px;
+  }
+
+  &__list {
+    margin-top: auto;
+    padding-left: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  &__list-item {
+    font-size: 14px;
+    color: t.$color-text-secondary;
+    padding-left: 18px;
+    position: relative;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 8px;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: t.$color-primary;
+    }
+  }
+}

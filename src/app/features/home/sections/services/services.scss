@@ -1,0 +1,24 @@
+@use '../../../../../styles' as t;
+
+.services-section {
+  background: t.$color-bg-alt;
+  padding: t.$spacing-xl t.$spacing-sm;
+
+  @media (min-width: t.$bp-tablet) {
+    padding: t.$spacing-2xl t.$spacing-sm;
+  }
+
+  &__grid {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: 1fr;
+
+    @media (min-width: t.$bp-mobile) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (min-width: t.$bp-desktop) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+}

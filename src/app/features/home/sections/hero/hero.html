@@ -1,0 +1,44 @@
+<section class="hero" aria-label="Apresentação do studio">
+  <div class="hero__overlay" aria-hidden="true"></div>
+
+  <div class="hero__container">
+    <!-- Header -->
+    <header class="hero__header">
+      <div class="hero__logo" aria-label="Julia Duarte Beauty Studio">
+        Julia Duarte<br />
+        <span class="hero__logo-accent">Beauty Studio</span>
+      </div>
+    </header>
+
+    <!-- Rating badge -->
+    <div class="hero__badge" aria-label="Avaliação 5.0 no Google">
+      <span aria-hidden="true">⭐</span>
+      <span>Avaliação 5.0 no Google</span>
+    </div>
+
+    <!-- Headline -->
+    <div class="hero__content">
+      <h1 class="hero__title">
+        Beleza que combina<br />
+        <em class="hero__title-accent">com quem você é</em>
+      </h1>
+
+      <p class="hero__subtitle">
+        Maquiagem, penteado e unhas em gel em São Paulo&nbsp;–&nbsp;SP.<br />
+        Técnicas premium, atendimento personalizado e resultado elegante.
+      </p>
+
+      <app-whatsapp-button
+        [fullWidth]="true"
+        label="Agendar Meu Horário"
+        ariaLabel="Agendar horário no Julia Duarte Beauty Studio pelo WhatsApp"
+      />
+
+      <p class="hero__location">
+        <span aria-hidden="true">📍</span>
+        Vila Maria, São Paulo&nbsp;–&nbsp;SP<br />
+        <span>Atendimento em studio e possibilidade de deslocamento</span>
+      </p>
+    </div>
+  </div>
+</section>

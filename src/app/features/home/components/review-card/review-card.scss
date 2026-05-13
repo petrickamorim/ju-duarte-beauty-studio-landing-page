@@ -1,0 +1,54 @@
+@use '../../../../../styles' as t;
+
+.review-card {
+  background: t.$color-bg-white;
+  padding: t.$spacing-md;
+  border-radius: t.$radius-md;
+  box-shadow: t.$shadow-card;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition:
+    transform t.$transition-smooth,
+    box-shadow t.$transition-smooth;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: t.$shadow-card-hover;
+  }
+
+  &__stars {
+    color: #f9a825;
+    font-size: 18px;
+    letter-spacing: 2px;
+  }
+
+  &__text {
+    font-size: 15px;
+    line-height: 1.7;
+    color: t.$color-text-secondary;
+    font-style: italic;
+    flex: 1;
+
+    p {
+      margin: 0;
+    }
+  }
+
+  &__author {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+
+    strong {
+      font-size: 14px;
+      font-weight: 700;
+      color: t.$color-text-main;
+    }
+  }
+
+  &__role {
+    font-size: 12px;
+    color: t.$color-text-light;
+  }
+}

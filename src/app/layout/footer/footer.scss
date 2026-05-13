@@ -1,0 +1,64 @@
+@use '../../../styles' as t;
+
+.footer {
+  background: t.$color-footer-bg;
+  color: rgba(255, 255, 255, 0.9);
+  padding: t.$spacing-xl t.$spacing-sm t.$spacing-lg;
+
+  &__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    text-align: center;
+  }
+
+  &__brand {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  &__logo {
+    font-family: t.$font-title;
+    font-size: 22px;
+    font-weight: 700;
+    color: #ffffff;
+  }
+
+  &__tagline {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  &__links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  &__link {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+    transition: color t.$transition-base;
+
+    &:hover {
+      color: t.$color-primary-light;
+    }
+  }
+
+  &__copy {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.4);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 20px;
+    width: 100%;
+    text-align: center;
+  }
+}

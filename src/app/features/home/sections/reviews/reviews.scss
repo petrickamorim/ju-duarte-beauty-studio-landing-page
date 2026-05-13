@@ -1,0 +1,53 @@
+@use '../../../../../styles' as t;
+
+.reviews-section {
+  background: t.$color-bg-main;
+  padding: t.$spacing-xl t.$spacing-sm;
+
+  @media (min-width: t.$bp-tablet) {
+    padding: t.$spacing-2xl t.$spacing-sm;
+  }
+
+  &__grid {
+    display: grid;
+    gap: 18px;
+    grid-template-columns: 1fr;
+
+    @media (min-width: t.$bp-mobile) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (min-width: t.$bp-tablet) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    @media (min-width: t.$bp-desktop) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  &__summary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-top: t.$spacing-lg;
+    padding: 16px 28px;
+    background: t.$color-bg-white;
+    border-radius: t.$radius-full;
+    border: 1px solid t.$color-border;
+    width: fit-content;
+    margin-inline: auto;
+  }
+
+  &__rating {
+    font-size: 18px;
+    font-weight: 700;
+    color: t.$color-text-main;
+  }
+
+  &__count {
+    font-size: 14px;
+    color: t.$color-text-secondary;
+  }
+}
