@@ -21,7 +21,7 @@
           >
             <!-- Imagem Depois (base, full width) -->
             <img
-              [src]="imagemUrl(item.seedDepois)"
+              [src]="imagemUrl(item.imagemDepois)"
               [alt]="item.altDepois"
               class="antes-depois__imagem-depois"
               loading="lazy"
@@ -33,10 +33,10 @@
             <!-- Imagem Antes (sobreposta, clip por posição) -->
             <div
               class="antes-depois__antes-wrapper"
-              [style.width.%]="getPosicao(i)"
+              [style.clipPath]="'inset(0 ' + (100 - getPosicao(i)) + '% 0 0)'"
             >
               <img
-                [src]="imagemUrl(item.seedAntes)"
+                [src]="imagemUrl(item.imagemAntes)"
                 [alt]="item.altAntes"
                 class="antes-depois__imagem-antes"
                 loading="lazy"

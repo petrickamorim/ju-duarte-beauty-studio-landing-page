@@ -50,7 +50,7 @@ export const SERVICOS_DETALHE: readonly ServicoDetalhe[] = [
     mensagemWhatsApp: encodeURIComponent(
       'Olá! Gostaria de agendar uma maquiagem profissional. Poderia me passar mais informações?',
     ),
-    tituloPagina: 'Maquiagem Profissional | Julia Duarte Beauty Studio',
+    tituloPagina: 'Maquiagem Profissional | Ju Duarte Beauty Studio',
   },
   {
     slug: 'noivas',
@@ -84,7 +84,7 @@ export const SERVICOS_DETALHE: readonly ServicoDetalhe[] = [
     mensagemWhatsApp: encodeURIComponent(
       'Olá! Gostaria de saber mais sobre o pacote para noivas. Pode me passar informações sobre disponibilidade e valores?',
     ),
-    tituloPagina: 'Pacote para Noivas | Julia Duarte Beauty Studio',
+    tituloPagina: 'Pacote para Noivas | Ju Duarte Beauty Studio',
     temFormularioOrcamento: true,
   },
   {
@@ -119,7 +119,7 @@ export const SERVICOS_DETALHE: readonly ServicoDetalhe[] = [
     mensagemWhatsApp: encodeURIComponent(
       'Olá! Gostaria de agendar um penteado. Poderia me informar a disponibilidade e valores?',
     ),
-    tituloPagina: 'Penteado Profissional | Julia Duarte Beauty Studio',
+    tituloPagina: 'Penteado Profissional | Ju Duarte Beauty Studio',
   },
   {
     slug: 'unhas-em-gel',
@@ -153,7 +153,7 @@ export const SERVICOS_DETALHE: readonly ServicoDetalhe[] = [
     mensagemWhatsApp: encodeURIComponent(
       'Olá! Gostaria de agendar um procedimento de unhas em gel. Pode me passar informações sobre disponibilidade e valores?',
     ),
-    tituloPagina: 'Unhas em Gel | Julia Duarte Beauty Studio',
+    tituloPagina: 'Unhas em Gel | Ju Duarte Beauty Studio',
   },
 ] as const;
 

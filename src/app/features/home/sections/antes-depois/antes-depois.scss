@@ -76,28 +76,21 @@
     pointer-events: none;
   }
 
-  // ── Wrapper da imagem Antes (largura controlada pelo slider) ──
+  // ── Wrapper da imagem Antes (clip-path controla a área visível) ──
   &__antes-wrapper {
     position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    overflow: hidden;
-    // Transição leve apenas quando não está arrastando (snap inicial)
-    // JS remove a classe --arrastando e a transition entra em ação só no estado final
+    inset: 0;
     pointer-events: none;
   }
 
-  // ── Imagem Antes (dentro do wrapper, mesmas dimensões) ────────
+  // ── Imagem Antes (tamanho igual à imagem Depois) ──────────────
   &__imagem-antes {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw; // Garante que a imagem não encolhe com o wrapper
-    max-width: 600px;
+    inset: 0;
+    width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: left center;
+    object-position: center;
     display: block;
     pointer-events: none;
   }

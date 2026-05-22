@@ -7,97 +7,24 @@
       id="instagram-titulo"
     />
 
-    <!-- Loading skeleton -->
-    @if (instagram.carregando()) {
-      <div class="instagram__grid instagram__grid--skeleton" aria-busy="true" aria-label="Carregando feed do Instagram">
-        @for (i of POSTS_PLACEHOLDER; track i) {
-          <div class="instagram__skeleton"></div>
-        }
-      </div>
-    }
-
-    <!-- Posts reais -->
-    @if (!instagram.carregando() && !instagram.comErro() && instagram.posts().length > 0) {
-      <div class="instagram__grid" role="list" aria-label="Feed do Instagram">
-        @for (post of instagram.posts(); track post.id) {
-          <a
-            [href]="post.permalink"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="instagram__post"
-            role="listitem"
-            [attr.aria-label]="post.caption ? post.caption.slice(0, 80) : 'Ver post no Instagram'"
-          >
-            <figure class="instagram__figura">
-              <img
-                [src]="instagram.imagemUrl(post)"
-                [alt]="post.caption ? post.caption.slice(0, 100) : 'Post do Instagram'"
-                class="instagram__imagem"
-                loading="lazy"
-                width="300"
-                height="300"
-              />
-              <div class="instagram__overlay" aria-hidden="true">
-                @if (post.media_type === 'VIDEO') {
-                  <svg class="instagram__icone-tipo" viewBox="0 0 24 24" fill="currentColor" width="28" height="28">
-                    <path d="M8 5v14l11-7z"/>
-                  </svg>
-                } @else if (post.media_type === 'CAROUSEL_ALBUM') {
-                  <svg class="instagram__icone-tipo" viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
-                    <path d="M22 16V4a2 2 0 00-2-2H8a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2zm-11-4l2.03 2.71L16 11l4 5H8l3-4zM2 6v14a2 2 0 002 2h14v-2H4V6H2z"/>
-                  </svg>
-                } @else {
-                  <svg class="instagram__coracao" viewBox="0 0 24 24" fill="currentColor" width="32" height="32">
-                    <path d="M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447 2.54 0 5.274 1.621 5.274 5.181 0 4.069-5.136 8.625-11 14.402z"/>
-                  </svg>
-                }
-              </div>
-            </figure>
-          </a>
-        }
-      </div>
-    }
-
-    <!-- Fallback: erro ou sem posts -->
-    @if (!instagram.carregando() && (instagram.comErro() || instagram.posts().length === 0)) {
-      <div class="instagram__grid" role="list" aria-label="Prévia do Instagram">
-        @for (i of POSTS_PLACEHOLDER; track i) {
-          <a
-            [href]="instagramUrl"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="instagram__post"
-            role="listitem"
-            aria-label="Ver perfil no Instagram"
-          >
-            <figure class="instagram__figura">
-              <img
-                [src]="'https://picsum.photos/seed/insta' + (i + 1) + '/300/300'"
-                alt="Post do Instagram"
-                class="instagram__imagem"
-                loading="lazy"
-                width="300"
-                height="300"
-              />
-              <div class="instagram__overlay" aria-hidden="true">
-                <svg class="instagram__coracao" viewBox="0 0 24 24" fill="currentColor" width="32" height="32">
-                  <path d="M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447 2.54 0 5.274 1.621 5.274 5.181 0 4.069-5.136 8.625-11 14.402z"/>
-                </svg>
-              </div>
-            </figure>
-          </a>
-        }
-      </div>
-    }
+    <div class="instagram__widget">
+      <behold-widget feed-id="uisNdmwIomcrBgkP1WjO"></behold-widget>
+    </div>
 
     <div class="instagram__cta">
       <div class="instagram__handle" aria-label="Perfil no Instagram">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false" width="18" height="18" class="instagram__handle-icone">
-          <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+          <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.919-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
         </svg>
         <span>{{ instagramHandle }}</span>
       </div>
-      <a [href]="instagramUrl" target="_blank" rel="noopener noreferrer" class="instagram__seguir-btn" aria-label="Seguir Julia Duarte Beauty Studio no Instagram">
+      <a
+        [href]="instagramUrl"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="instagram__seguir-btn"
+        aria-label="Seguir Ju Duarte Beauty Studio no Instagram"
+      >
         Seguir no Instagram
       </a>
     </div>

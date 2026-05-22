@@ -13,19 +13,6 @@ import { ServiceItem } from '../../models/service.model';
 export class ServicesComponent {
   readonly services = signal<ServiceItem[]>([
     {
-      slug: 'maquiagem',
-      name: 'Maquiagem',
-      icon: '💄',
-      description:
-        'Maquiagem profissional para eventos, fotos, formaturas, madrinhas, convidadas e noivas.',
-      highlights: [
-        'Preparação de pele personalizada',
-        'Acabamento profissional e duradouro',
-        'Produção pensada para fotos e eventos',
-        'Opções social, glam e noiva',
-      ],
-    },
-    {
       slug: 'noivas',
       name: 'Noivas',
       icon: '👰',
@@ -36,6 +23,19 @@ export class ServicesComponent {
         'Teste de noiva incluído',
         'Atendimento exclusivo e personalizado',
         'Visita ao local disponível',
+      ],
+    },
+    {
+      slug: 'maquiagem',
+      name: 'Maquiagem',
+      icon: '💄',
+      description:
+        'Maquiagem profissional para eventos, fotos, formaturas, madrinhas, convidadas e noivas.',
+      highlights: [
+        'Preparação de pele personalizada',
+        'Acabamento profissional e duradouro',
+        'Produção pensada para fotos e eventos',
+        'Opções social, glam e noiva',
       ],
     },
     {

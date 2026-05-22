@@ -12,36 +12,36 @@ import { WHATSAPP_URL } from '../../../../core/constants/contact.constants';
 interface TransformacaoItem {
   readonly titulo: string;
   readonly servico: string;
-  readonly seedAntes: string;
-  readonly seedDepois: string;
+  readonly imagemAntes: string;
+  readonly imagemDepois: string;
   readonly altAntes: string;
   readonly altDepois: string;
 }
 
 const TRANSFORMACOES: readonly TransformacaoItem[] = [
   {
-    titulo: 'Maquiagem de Noiva',
-    servico: 'Maquiagem + Penteado',
-    seedAntes: 'antes-noiva-natural-a',
-    seedDepois: 'depois-noiva-glamour-d',
-    altAntes: 'Noiva antes da produção profissional',
-    altDepois: 'Noiva com maquiagem e penteado prontos para o altar',
-  },
-  {
-    titulo: 'Penteado Elaborado',
-    servico: 'Penteado Social',
-    seedAntes: 'antes-cabelo-solto-b',
-    seedDepois: 'depois-coque-fino-e',
-    altAntes: 'Cabelo natural antes do penteado profissional',
-    altDepois: 'Penteado sofisticado finalizado com perfeição',
+    titulo: 'Maquiagem Social',
+    servico: 'Maquiagem Social',
+    imagemAntes: '/imagens/antes-depois/ad-maquiagemSocial/antes_maquiagemSocial.jpeg',
+    imagemDepois: '/imagens/antes-depois/ad-maquiagemSocial/depois_maquiagemSocial.jpeg',
+    altAntes: 'Antes da maquiagem social profissional',
+    altDepois: 'Maquiagem social elegante finalizada com perfeição',
   },
   {
     titulo: 'Unhas em Gel',
     servico: 'Alongamento em Gel',
-    seedAntes: 'antes-unhas-curtas-c',
-    seedDepois: 'depois-unhas-gel-f',
-    altAntes: 'Unhas naturais curtas antes do procedimento',
+    imagemAntes: '/imagens/antes-depois/ad-unha/antes_unha.jpeg',
+    imagemDepois: '/imagens/antes-depois/ad-unha/depois_unha.jpeg',
+    altAntes: 'Unhas naturais antes do procedimento em gel',
     altDepois: 'Unhas em gel alongadas com acabamento impecável',
+  },
+  {
+    titulo: 'Make Completa',
+    servico: 'Maquiagem Social',
+    imagemAntes: '/imagens/antes-depois/ad-maquiagemSocial02/antes_maquiagemSocial02.jpeg',
+    imagemDepois: '/imagens/antes-depois/ad-maquiagemSocial02/depois_maquiagemSocial02.jpeg',
+    altAntes: 'Antes da produção completa de maquiagem',
+    altDepois: 'Produção completa de maquiagem com resultado impecável',
   },
 ];
 
@@ -141,7 +141,7 @@ export class AntesDepoisComponent {
     return containers[indice] ?? null;
   }
 
-  imagemUrl(seed: string): string {
-    return `https://picsum.photos/seed/${seed}/600/420`;
+  imagemUrl(path: string): string {
+    return path;
   }
 }

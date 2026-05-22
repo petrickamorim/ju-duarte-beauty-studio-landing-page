@@ -1,16 +1,21 @@
 import {
   Component,
+  DestroyRef,
+  ElementRef,
   HostListener,
+  afterNextRender,
   computed,
+  effect,
+  inject,
   signal,
 } from '@angular/core';
 import { SectionHeaderComponent } from '../../../../shared/components/section-header/section-header';
 import { WHATSAPP_URL } from '../../../../core/constants/contact.constants';
 
-type Categoria = 'Todas' | 'Unhas' | 'Maquiagem' | 'Penteados' | 'Noivas';
+type Categoria = 'Todas' | 'Unhas' | 'Maquiagem' | 'Penteados';
 
 interface FotoGaleria {
-  readonly seed: string;
+  readonly src: string;
   readonly categoria: Categoria;
   readonly alt: string;
   readonly largura: number;
@@ -19,28 +24,22 @@ interface FotoGaleria {
 
 const FOTOS: readonly FotoGaleria[] = [
   // Unhas — 4 fotos
-  { seed: 'unhas-gel-01', categoria: 'Unhas', alt: 'Unhas em gel alongamento com acabamento espelhado', largura: 400, altura: 480 },
-  { seed: 'unhas-francesa-02', categoria: 'Unhas', alt: 'Esmaltação em gel francesa clássica', largura: 400, altura: 540 },
-  { seed: 'unhas-nailart-03', categoria: 'Unhas', alt: 'Nail art com detalhes florais em gel', largura: 400, altura: 395 },
-  { seed: 'unhas-blindagem-04', categoria: 'Unhas', alt: 'Blindagem em gel com glitter rosê', largura: 400, altura: 600 },
+  { src: '/imagens/galeria/unhas/unha01.jpeg', categoria: 'Unhas', alt: 'Unhas em gel com acabamento impecável', largura: 400, altura: 480 },
+  { src: '/imagens/galeria/unhas/unha02.jpeg', categoria: 'Unhas', alt: 'Esmaltação em gel com design elegante', largura: 400, altura: 540 },
+  { src: '/imagens/galeria/unhas/unha03.jpeg', categoria: 'Unhas', alt: 'Alongamento em gel natural e resistente', largura: 400, altura: 400 },
+  { src: '/imagens/galeria/unhas/unha04.jpeg', categoria: 'Unhas', alt: 'Blindagem em gel com acabamento sofisticado', largura: 400, altura: 600 },
 
   // Maquiagem — 4 fotos
-  { seed: 'make-social-05', categoria: 'Maquiagem', alt: 'Maquiagem social elegante para evento noturno', largura: 400, altura: 520 },
-  { seed: 'make-glamour-06', categoria: 'Maquiagem', alt: 'Make glamourosa com olho esfumado dourado', largura: 400, altura: 460 },
-  { seed: 'make-natural-07', categoria: 'Maquiagem', alt: 'Maquiagem natural iluminada para fotos', largura: 400, altura: 580 },
-  { seed: 'make-editorial-08', categoria: 'Maquiagem', alt: 'Produção editorial com lábio vermelho', largura: 400, altura: 410 },
+  { src: '/imagens/galeria/maquiagem/maquiagem01.jpeg', categoria: 'Maquiagem', alt: 'Maquiagem social elegante para evento', largura: 400, altura: 520 },
+  { src: '/imagens/galeria/maquiagem/maquiagem02.jpeg', categoria: 'Maquiagem', alt: 'Make glamourosa com acabamento impecável', largura: 400, altura: 460 },
+  { src: '/imagens/galeria/maquiagem/maquiagem03.jpeg', categoria: 'Maquiagem', alt: 'Maquiagem natural iluminada para fotos', largura: 400, altura: 580 },
+  { src: '/imagens/galeria/maquiagem/maquiagem04.jpeg', categoria: 'Maquiagem', alt: 'Produção completa de maquiagem profissional', largura: 400, altura: 420 },
 
   // Penteados — 4 fotos
-  { seed: 'pent-festa-09', categoria: 'Penteados', alt: 'Penteado elaborado com ondas para festa', largura: 400, altura: 545 },
-  { seed: 'pent-coque-10', categoria: 'Penteados', alt: 'Coque sofisticado com trança para casamento', largura: 400, altura: 440 },
-  { seed: 'pent-tranca-11', categoria: 'Penteados', alt: 'Trança lateral volumosa para madrinha', largura: 400, altura: 500 },
-  { seed: 'pent-semi-12', categoria: 'Penteados', alt: 'Semisolto com cachos definidos e acessórios', largura: 400, altura: 380 },
-
-  // Noivas — 4 fotos
-  { seed: 'noiva-classica-13', categoria: 'Noivas', alt: 'Produção clássica de noiva com véu longo', largura: 400, altura: 560 },
-  { seed: 'noiva-moderna-14', categoria: 'Noivas', alt: 'Look moderno de noiva com make smokey', largura: 400, altura: 490 },
-  { seed: 'noiva-rustica-15', categoria: 'Noivas', alt: 'Penteado e make para casamento rústico', largura: 400, altura: 430 },
-  { seed: 'noiva-completa-16', categoria: 'Noivas', alt: 'Produção completa noiva: make, penteado e unhas', largura: 400, altura: 600 },
+  { src: '/imagens/galeria/penteados/penteado01.jpeg', categoria: 'Penteados', alt: 'Penteado elaborado para evento especial', largura: 400, altura: 545 },
+  { src: '/imagens/galeria/penteados/penteado02.jpeg', categoria: 'Penteados', alt: 'Coque sofisticado com acabamento perfeito', largura: 400, altura: 440 },
+  { src: '/imagens/galeria/penteados/penteado03.jpeg', categoria: 'Penteados', alt: 'Penteado elegante para ocasião especial', largura: 400, altura: 500 },
+  { src: '/imagens/galeria/penteados/penteado04.jpeg', categoria: 'Penteados', alt: 'Penteado exclusivo com acabamento premium', largura: 400, altura: 480 },
 ];
 
 @Component({
@@ -51,11 +50,13 @@ const FOTOS: readonly FotoGaleria[] = [
   styleUrl: './galeria.scss',
 })
 export class GaleriaComponent {
+  private readonly el = inject(ElementRef) as ElementRef<HTMLElement>;
+  private readonly destroyRef = inject(DestroyRef);
+  private observer: IntersectionObserver | null = null;
+
   readonly whatsappUrl = WHATSAPP_URL;
   readonly whatsappMessage = encodeURIComponent('Olá, gostaria de agendar um horário!');
-
-  readonly categorias: readonly Categoria[] = ['Todas', 'Unhas', 'Maquiagem', 'Penteados', 'Noivas'];
-
+  readonly categorias: readonly Categoria[] = ['Todas', 'Unhas', 'Maquiagem', 'Penteados'];
   readonly categoriaAtiva = signal<Categoria>('Todas');
 
   readonly fotosFiltradas = computed<readonly FotoGaleria[]>(() => {
@@ -63,13 +64,62 @@ export class GaleriaComponent {
     return ativa === 'Todas' ? FOTOS : FOTOS.filter((f) => f.categoria === ativa);
   });
 
-  // Lightbox state
   readonly lightboxAberto = signal(false);
   readonly fotoAtiva = signal<FotoGaleria | null>(null);
   readonly indiceAtivo = signal(0);
+  readonly cardAtivo = signal<number | null>(null);
+
+  private timeoutToque: ReturnType<typeof setTimeout> | null = null;
+
+  constructor() {
+    afterNextRender(() => this.#iniciarObserver());
+
+    // Re-observa itens quando o filtro muda (DOM é atualizado após o signal)
+    effect(() => {
+      this.fotosFiltradas(); // lê para registrar dependência
+      setTimeout(() => this.#observarItens(), 50);
+    });
+
+    this.destroyRef.onDestroy(() => this.observer?.disconnect());
+  }
+
+  #iniciarObserver(): void {
+    if (typeof IntersectionObserver === 'undefined') return;
+
+    this.observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('galeria__item--visivel');
+            this.observer?.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15 },
+    );
+
+    this.#observarItens();
+  }
+
+  #observarItens(): void {
+    if (!this.observer) return;
+    const itens = this.el.nativeElement.querySelectorAll('.galeria__item:not(.galeria__item--visivel)');
+    itens.forEach((item) => this.observer!.observe(item));
+  }
 
   selecionarCategoria(categoria: Categoria): void {
     this.categoriaAtiva.set(categoria);
+  }
+
+  tocarCard(indice: number): void {
+    if (this.timeoutToque) clearTimeout(this.timeoutToque);
+    this.cardAtivo.set(indice);
+    this.timeoutToque = setTimeout(() => this.cardAtivo.set(null), 1400);
+  }
+
+  soltarCard(): void {
+    if (this.timeoutToque) clearTimeout(this.timeoutToque);
+    this.timeoutToque = setTimeout(() => this.cardAtivo.set(null), 800);
   }
 
   abrirLightbox(foto: FotoGaleria, indice: number): void {
@@ -95,31 +145,13 @@ export class GaleriaComponent {
   }
 
   @HostListener('document:keydown.escape')
-  onEscape(): void {
-    if (this.lightboxAberto()) {
-      this.fecharLightbox();
-    }
-  }
+  onEscape(): void { if (this.lightboxAberto()) this.fecharLightbox(); }
 
   @HostListener('document:keydown.arrowleft')
-  onArrowLeft(): void {
-    if (this.lightboxAberto()) {
-      this.navegarLightbox(-1);
-    }
-  }
+  onArrowLeft(): void { if (this.lightboxAberto()) this.navegarLightbox(-1); }
 
   @HostListener('document:keydown.arrowright')
-  onArrowRight(): void {
-    if (this.lightboxAberto()) {
-      this.navegarLightbox(1);
-    }
-  }
+  onArrowRight(): void { if (this.lightboxAberto()) this.navegarLightbox(1); }
 
-  imagemUrl(seed: string, largura: number, altura: number): string {
-    return `https://picsum.photos/seed/${seed}/${largura}/${altura}`;
-  }
-
-  imagemUrlLightbox(seed: string): string {
-    return `https://picsum.photos/seed/${seed}/900/700`;
-  }
+  imagemUrl(foto: FotoGaleria): string { return foto.src; }
 }

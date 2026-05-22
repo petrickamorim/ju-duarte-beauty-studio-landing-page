@@ -22,19 +22,25 @@
     </nav>
 
     <div class="galeria__grid" role="list" aria-label="Fotos da galeria">
-      @for (foto of fotosFiltradas(); track foto.seed; let i = $index) {
-        <article class="galeria__item" role="listitem">
+      @for (foto of fotosFiltradas(); track foto.src; let i = $index) {
+        <article
+          class="galeria__item"
+          [class.galeria__item--ativo]="cardAtivo() === i"
+          role="listitem"
+        >
           <figure
             class="galeria__figura"
             (click)="abrirLightbox(foto, i)"
             (keydown.enter)="abrirLightbox(foto, i)"
             (keydown.space)="abrirLightbox(foto, i)"
+            (touchstart)="tocarCard(i)"
+            (touchend)="soltarCard()"
             tabindex="0"
             role="button"
             [attr.aria-label]="'Ampliar foto: ' + foto.alt"
           >
             <img
-              [src]="imagemUrl(foto.seed, foto.largura, foto.altura)"
+              [src]="imagemUrl(foto)"
               [alt]="foto.alt"
               class="galeria__imagem"
               loading="lazy"
@@ -109,7 +115,7 @@
     <div class="galeria__lightbox-conteudo" (click)="$event.stopPropagation()">
       @if (fotoAtiva(); as foto) {
         <img
-          [src]="imagemUrlLightbox(foto.seed)"
+          [src]="foto.src"
           [alt]="foto.alt"
           class="galeria__lightbox-imagem"
         />

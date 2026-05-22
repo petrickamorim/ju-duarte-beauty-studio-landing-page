@@ -18,13 +18,15 @@ import { ServiceItem } from '../../models/service.model';
           }
         </ul>
       }
-      <a
-        class="service-card__cta"
-        [routerLink]="['/servicos', service().slug]"
-        [attr.aria-label]="'Saiba mais sobre ' + service().name"
-      >
-        Saiba mais
-      </a>
+      @if (service().slug === 'noivas') {
+        <a
+          class="service-card__cta"
+          [routerLink]="['/servicos', service().slug]"
+          [attr.aria-label]="'Saiba mais sobre ' + service().name"
+        >
+          Saiba mais
+        </a>
+      }
     </article>
   `,
   styleUrl: './service-card.scss',

@@ -63,12 +63,8 @@
 
   // ── Grid masonry ─────────────────────────────────────────────
   &__grid {
-    columns: 1;
-    column-gap: 16px;
-
-    @media (min-width: t.$bp-mobile) {
-      columns: 2;
-    }
+    columns: 2;
+    column-gap: 8px;
 
     @media (min-width: t.$bp-tablet) {
       columns: 3;
@@ -83,7 +79,7 @@
 
   &__item {
     break-inside: avoid;
-    margin-bottom: 16px;
+    margin-bottom: 8px;
     animation: galeriaEntrada 0.45s t.$transition-smooth both;
 
     @media (min-width: t.$bp-tablet) {
@@ -139,16 +135,31 @@
     inset: 0;
     background: linear-gradient(
       to top,
-      rgba(t.$color-primary-dark, 0.72) 0%,
-      rgba(t.$color-primary, 0.25) 50%,
+      rgba(t.$color-primary-dark, 0.65) 0%,
+      rgba(t.$color-primary, 0.15) 45%,
       transparent 100%
     );
     opacity: 0;
-    transition: opacity t.$transition-smooth;
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
     padding: t.$spacing-sm;
+    transition: opacity 0.25s ease;
+  }
+
+  // Mobile: aparece ao toque
+  @media (max-width: #{t.$bp-desktop - 1px}) {
+    &__item--ativo .galeria__overlay {
+      opacity: 1;
+    }
+  }
+
+  // Desktop: aparece no hover
+  @media (min-width: t.$bp-desktop) {
+    &__figura:hover .galeria__overlay,
+    &__figura:focus-visible .galeria__overlay {
+      opacity: 1;
+    }
   }
 
   &__categoria-label {
@@ -166,22 +177,26 @@
   }
 
   &__lupa {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background: rgba(#fff, 0.2);
-    backdrop-filter: blur(4px);
-    border: 1px solid rgba(#fff, 0.35);
-    color: #fff;
-    opacity: 0;
-    transform: translateY(6px) scale(0.9);
-    transition:
-      opacity t.$transition-smooth,
-      transform t.$transition-smooth;
-    flex-shrink: 0;
+    display: none; // oculto no mobile — estilo Pinterest sem ícone
+
+    @media (min-width: t.$bp-desktop) {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(#fff, 0.2);
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(#fff, 0.35);
+      color: #fff;
+      opacity: 0;
+      transform: translateY(6px) scale(0.9);
+      transition:
+        opacity t.$transition-smooth,
+        transform t.$transition-smooth;
+      flex-shrink: 0;
+    }
   }
 
   // ── CTA final ─────────────────────────────────────────────────

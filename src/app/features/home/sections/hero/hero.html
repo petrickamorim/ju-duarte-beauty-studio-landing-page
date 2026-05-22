@@ -1,44 +1,74 @@
-<section class="hero" aria-label="Apresentação do studio">
-  <div class="hero__overlay" aria-hidden="true"></div>
+<section class="hero" aria-label="Apresentação do Ju Duarte Beauty Studio">
 
-  <div class="hero__container">
-    <!-- Header -->
-    <header class="hero__header">
-      <div class="hero__logo" aria-label="Julia Duarte Beauty Studio">
-        Julia Duarte<br />
-        <span class="hero__logo-accent">Beauty Studio</span>
-      </div>
+  <!-- Coluna visual / imagem cinematográfica -->
+  <figure class="hero__figure" aria-hidden="true">
+    <img
+      class="hero__image"
+      src="/imagens/hero/hero.jpeg"
+      sizes="(min-width: 1024px) 45vw, 100vw"
+      alt="Sessão editorial de beleza feminina — Ju Duarte Beauty Studio"
+      width="1400"
+      height="1867"
+      fetchpriority="high"
+    />
+    <div class="hero__image-overlay" aria-hidden="true"></div>
+  </figure>
+
+  <!-- Coluna de conteúdo editorial -->
+  <div class="hero__content">
+
+    <!-- Detalhe de canto decorativo — desktop only -->
+    <span class="hero__corner-ornament" aria-hidden="true"></span>
+
+    <!-- Eyebrow com linha vertical -->
+    <header class="hero__eyebrow-wrapper">
+      <span class="hero__eyebrow-line" aria-hidden="true"></span>
+      <p class="hero__eyebrow" aria-label="Beauty Studio">
+        <span aria-hidden="true">&#x2726;</span>&nbsp;&nbsp;Beauty Studio
+      </p>
     </header>
 
-    <!-- Rating badge -->
-    <div class="hero__badge" aria-label="Avaliação 5.0 no Google">
-      <span aria-hidden="true">⭐</span>
-      <span>Avaliação 5.0 no Google</span>
+    <!-- Badge de avaliação -->
+    <div class="hero__badge" role="note" aria-label="Avaliação 5,0 com mais de 47 avaliações no Google">
+      <span aria-hidden="true">&#9733;</span>
+      <span>5,0 &middot; +47 avaliações Google</span>
     </div>
 
-    <!-- Headline -->
-    <div class="hero__content">
-      <h1 class="hero__title">
-        Beleza que combina<br />
-        <em class="hero__title-accent">com quem você é</em>
-      </h1>
+    <!-- Headline principal -->
+    <h1 class="hero__headline">
+      Beleza sofisticada<br />
+      para mulheres que<br />
+      valorizam <em class="hero__headline-em">elegância.</em>
+    </h1>
 
-      <p class="hero__subtitle">
-        Maquiagem, penteado e unhas em gel em São Paulo&nbsp;–&nbsp;SP.<br />
-        Técnicas premium, atendimento personalizado e resultado elegante.
-      </p>
+    <!-- Subheadline -->
+    <p class="hero__subheadline">
+      Maquiagem, penteado e unhas premium com atendimento
+      personalizado em São Paulo.
+    </p>
 
+    <!-- CTAs -->
+    <div class="hero__ctas" role="group" aria-label="Ações principais">
       <app-whatsapp-button
-        [fullWidth]="true"
+        [href]="whatsappUrl"
         label="Agendar Meu Horário"
         ariaLabel="Agendar horário no Julia Duarte Beauty Studio pelo WhatsApp"
       />
-
-      <p class="hero__location">
-        <span aria-hidden="true">📍</span>
-        Vila Maria, São Paulo&nbsp;–&nbsp;SP<br />
-        <span>Atendimento em studio e possibilidade de deslocamento</span>
-      </p>
+      <a
+        class="hero__btn-secundario"
+        href="#servicos"
+        aria-label="Ver nossos serviços"
+      >
+        Ver Serviços
+      </a>
     </div>
+
+    <!-- Scroll indicator — desktop only -->
+    <div class="hero__scroll-indicator" aria-hidden="true">
+      <span class="hero__scroll-text">Scroll</span>
+      <span class="hero__scroll-line"></span>
+    </div>
+
   </div>
 </section>
+
