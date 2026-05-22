@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="pt-BR">
   <head>
@@ -8,15 +7,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
-      content="Studio de beleza premium em São Paulo. Maquiagem profissional, penteados, unhas em gel e atendimento para noivas. Marque pelo WhatsApp!"
+      content="Studio de beleza premium em São Paulo. Maquiagem profissional, penteados, unhas em gel e atendimento para noivas e debutantes. Marque pelo WhatsApp!"
     />
-    <meta name="keywords" content="maquiagem São Paulo, penteado noiva, unhas em gel, beauty studio, Vila Maria SP" />
+    <meta name="keywords" content="maquiagem São Paulo, penteado noiva, unhas em gel, beauty studio, Vila Maria SP, debutante" />
     <meta name="author" content="Ju Duarte Beauty Studio" />
     <meta name="robots" content="index, follow" />
 
+    <!-- GitHub Pages SPA redirect -->
+    <script>
+      (function(l) {
+        if (l.search[1] === '/') {
+          var decoded = l.search.slice(1).split('&').map(function(s) {
+            return s.replace(/~and~/g, '&');
+          }).join('?');
+          window.history.replaceState(null, null,
+            l.pathname.slice(0, -1) + decoded + l.hash
+          );
+        }
+      }(window.location));
+    </script>
+
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://juliadeaurtebeautystudio.com.br/" />
+    <meta property="og:url" content="https://juduartebeautystudio.com/" />
     <meta property="og:title" content="Ju Duarte Beauty Studio | São Paulo" />
     <meta
       property="og:description"
@@ -30,7 +43,7 @@
     <meta name="twitter:description" content="Studio de beleza premium em São Paulo – SP." />
 
     <!-- Canonical -->
-    <link rel="canonical" href="https://juliadeaurtebeautystudio.com.br/" />
+    <link rel="canonical" href="https://juduartebeautystudio.com/" />
 
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="ju-duarte-favicon.ico" />
@@ -58,8 +71,8 @@
         "@context": "https://schema.org",
         "@type": "BeautySalon",
         "name": "Ju Duarte Beauty Studio",
-        "description": "Studio de beleza premium com maquiagem profissional, penteados e unhas em gel.",
-        "url": "https://juliadeaurtebeautystudio.com.br",
+        "description": "Studio de beleza premium com maquiagem profissional, penteados, unhas em gel e atendimento para noivas e debutantes.",
+        "url": "https://juduartebeautystudio.com",
         "telephone": "+5511933605983",
         "address": {
           "@type": "PostalAddress",
