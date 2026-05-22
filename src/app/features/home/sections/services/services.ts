@@ -14,13 +14,13 @@ export class ServicesComponent {
   readonly services = signal<ServiceItem[]>([
     {
       slug: 'noivas',
-      name: 'Noivas',
+      name: 'Noivas & Debutantes',
       icon: '👰',
       description:
-        'Atendimento completo para o grande dia, com organização, cuidado e sofisticação.',
+        'Atendimento completo para o grande dia — casamentos e festas de 15 anos com sofisticação e cuidado.',
       highlights: [
         'Pacote completo make + penteado',
-        'Teste de noiva incluído',
+        'Teste de noiva ou debutante incluído',
         'Atendimento exclusivo e personalizado',
         'Visita ao local disponível',
       ],

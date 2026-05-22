@@ -54,37 +54,37 @@ export const SERVICOS_DETALHE: readonly ServicoDetalhe[] = [
   },
   {
     slug: 'noivas',
-    nome: 'Noivas',
+    nome: 'Noivas & Debutantes',
     icone: '👰',
-    tagline: 'O maior dia da sua vida merece um cuidado único',
+    tagline: 'O maior dia da sua vida merece um cuidado único e exclusivo',
     descricao:
-      'Atendimento exclusivo e completo para noivas, com planejamento detalhado, teste de noiva e toda a atenção que o grande dia exige. Do teste à cerimônia, você estará em mãos experientes e carinhosas.',
+      'Atendimento completo e personalizado para noivas e debutantes. Com planejamento detalhado, teste incluído e toda a atenção que o grande momento exige — do casamento à festa de 15 anos, você estará em mãos experientes e carinhosas.',
     itens: [
       {
         titulo: 'Pacote Completo Make + Penteado',
-        descricao: 'Produção completa com maquiagem e penteado alinhados ao seu estilo.',
+        descricao: 'Produção completa com maquiagem e penteado alinhados ao seu estilo e tema.',
       },
       {
-        titulo: 'Teste de Noiva Incluído',
+        titulo: 'Teste Incluído',
         descricao: 'Sessão prévia para definir o look ideal antes do grande dia.',
       },
       {
         titulo: 'Atendimento Exclusivo',
-        descricao: 'Dedicação total à noiva no dia do casamento, sem pressa.',
+        descricao: 'Dedicação total no dia do evento, sem pressa e com todo o cuidado.',
       },
       {
         titulo: 'Visita ao Local',
-        descricao: 'Possibilidade de atendimento no local do casamento ou na sua casa.',
+        descricao: 'Possibilidade de atendimento no local do evento ou na sua casa.',
       },
       {
         titulo: 'Consultoria de Produção',
-        descricao: 'Orientação sobre o visual completo: véu, acessórios e harmonização.',
+        descricao: 'Orientação sobre o visual completo: acessórios, véu ou coroa e harmonização.',
       },
     ],
     mensagemWhatsApp: encodeURIComponent(
-      'Olá! Gostaria de saber mais sobre o pacote para noivas. Pode me passar informações sobre disponibilidade e valores?',
+      'Olá! Gostaria de saber mais sobre o pacote para noivas e debutantes. Pode me passar informações sobre disponibilidade e valores?',
     ),
-    tituloPagina: 'Pacote para Noivas | Ju Duarte Beauty Studio',
+    tituloPagina: 'Noivas & Debutantes | Ju Duarte Beauty Studio',
     temFormularioOrcamento: true,
   },
   {
