@@ -41,8 +41,10 @@ O foco principal é conversão via WhatsApp.
 
 ## Deploy
 
-- Vercel
-- Netlify
+- GitHub Pages, publicado pelo GitHub Actions (`.github/workflows/deploy.yml`)
+- Todo push na `main` faz build e deploy automático em https://juduartebeautystudio.com
+- Domínio e HTTPS configurados em Settings → Pages (fonte: GitHub Actions)
+- Arquivos estáticos (CNAME, sitemap.xml, ícones) ficam em `public/`
 
 ---
 

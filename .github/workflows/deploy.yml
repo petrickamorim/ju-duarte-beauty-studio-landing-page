@@ -1,0 +1,72 @@
+# Build + deploy do site (Angular) no GitHub Pages a cada push na main.
+# Produção: https://juduartebeautystudio.com (domínio configurado em Settings → Pages).
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: # permite rodar manualmente pela aba Actions
+
+# Permissões mínimas exigidas pelo deploy do GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Um deploy por vez; um push novo cancela o deploy anterior que ainda não terminou
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Instalar dependências
+        run: npm ci
+
+      - name: Build de produção
+        run: npx ng build --configuration production
+
+      - name: Preparar arquivos do Pages
+        working-directory: dist/site-julia/browser
+        run: |
+          # SPA: o Pages devolve o 404.html em rotas como /servicos/noivas — com o app
+          # completo dentro, a rota abre direto (mesmo comportamento do deploy anterior)
+          cp index.html 404.html
+          # Evita que o Pages processe os arquivos com Jekyll
+          touch .nojekyll
+          # Garante que os arquivos essenciais estão no artefato
+          test -f CNAME && test -f sitemap.xml && test -f ju-duarte-favicon.ico
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist/site-julia/browser
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Publicar no GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+      - name: Verificar produção
+        run: |
+          # Confere que o domínio responde e já serve o index publicado
+          for i in $(seq 1 12); do
+            status=$(curl -s -o /dev/null -w '%{http_code}' https://juduartebeautystudio.com/)
+            [ "$status" = "200" ] && { echo "Produção OK ($status)"; exit 0; }
+            echo "Aguardando produção... ($status)"; sleep 10
+          done
+          echo "::error::juduartebeautystudio.com não respondeu 200"; exit 1
