@@ -4,6 +4,8 @@
 $altura-header: 72px;
 // Largura máxima do conteúdo do site (igual ao .container)
 $largura-container: 1200px;
+// Quanto a foto do hero é empurrada para a direita no desktop
+$hero-foto-deslocamento: 9%;
 
 @keyframes heroFadeUp {
   from {
@@ -86,12 +88,14 @@ $largura-container: 1200px;
 
     @media (min-width: t.$bp-desktop) {
       background:
+        // Sólido até onde a foto começa (deslocamento), depois se desfaz sobre ela
         linear-gradient(
           to right,
           t.$color-bg-main 0%,
-          rgba(t.$color-bg-main, 0.7) 7%,
-          rgba(t.$color-bg-main, 0.2) 18%,
-          rgba(t.$color-bg-main, 0) 30%
+          t.$color-bg-main $hero-foto-deslocamento,
+          rgba(t.$color-bg-main, 0.7) calc(#{$hero-foto-deslocamento} + 7%),
+          rgba(t.$color-bg-main, 0.2) calc(#{$hero-foto-deslocamento} + 18%),
+          rgba(t.$color-bg-main, 0) calc(#{$hero-foto-deslocamento} + 30%)
         ),
         // Leve véu rosé na base, puxando a foto para a paleta do site
         linear-gradient(to top, rgba(t.$color-primary, 0.12) 0%, rgba(t.$color-primary, 0) 35%);
@@ -121,8 +125,18 @@ $largura-container: 1200px;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center top;
+  // Enquadra pelo rosto (na foto original o nariz fica em ~53% × 42%),
+  // em vez de alinhar pelo topo — mantém o rosto centralizado em qualquer tela
+  object-position: 53% 40%;
   animation: heroFoco 1.6s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+
+  // Desktop: a foto ocupa a largura toda (object-position x não tem efeito), então
+  // ela é deslocada para a direita. O vão à esquerda fica sob o degradê, que começa
+  // 100% na cor do fundo — sem emenda visível.
+  @media (min-width: t.$bp-desktop) {
+    left: $hero-foto-deslocamento;
+    right: auto;
+  }
 }
 
 // ── Conteúdo ────────────────────────────────────────────────
