@@ -1,97 +1,96 @@
 @use '../../../../../styles' as t;
-@use 'sass:color';
 
 .galeria {
-  background: t.$color-bg-alt;
-  padding: t.$spacing-xl t.$spacing-sm;
+  background: t.$color-bg-main;
+  padding: 72px 0;
 
   @media (min-width: t.$bp-tablet) {
-    padding: t.$spacing-2xl t.$spacing-sm;
+    padding: 112px 0;
+  }
+
+  // ── Topo: título à esquerda, filtros à direita ───────────────
+  &__topo {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 24px 32px;
+    margin-bottom: 32px;
+
+    @media (min-width: t.$bp-tablet) {
+      margin-bottom: 48px;
+    }
   }
 
   // ── Filtros ──────────────────────────────────────────────────
   &__filtros {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    gap: t.$spacing-xs;
-    margin-bottom: t.$spacing-lg;
-
-    @media (min-width: t.$bp-tablet) {
-      gap: 12px;
-      margin-bottom: t.$spacing-xl;
-    }
+    gap: 8px;
   }
 
   &__filtro-btn {
+    min-height: 40px;
+    padding: 0 18px;
     font-family: t.$font-body;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 600;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: t.$color-text-secondary;
-    background: t.$color-bg-white;
-    border: 1.5px solid t.$color-border;
+    color: t.$color-text-main;
+    background: transparent;
+    border: 1px solid #d9c6bd;
     border-radius: t.$radius-full;
-    padding: 10px 22px;
     cursor: pointer;
     transition:
       background-color t.$transition-base,
       color t.$transition-base,
-      border-color t.$transition-base,
-      box-shadow t.$transition-base,
-      transform t.$transition-base;
+      border-color t.$transition-base;
 
     &:hover:not(&--ativo) {
-      border-color: t.$color-primary-light;
-      color: t.$color-primary;
-      background: rgba(t.$color-primary, 0.04);
+      border-color: t.$color-text-main;
     }
 
     &--ativo {
-      background: t.$color-primary;
-      border-color: t.$color-primary;
+      background: t.$color-text-main;
+      border-color: t.$color-text-main;
       color: #fff;
-      box-shadow: 0 4px 14px rgba(t.$color-primary, 0.3);
-
-      &:hover {
-        background: t.$color-primary-dark;
-        border-color: t.$color-primary-dark;
-      }
     }
   }
 
   // ── Grid masonry ─────────────────────────────────────────────
+  // Colunas explícitas montadas no TS (ver `colunas` em galeria.ts)
   &__grid {
-    columns: 2;
-    column-gap: 8px;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
 
     @media (min-width: t.$bp-tablet) {
-      columns: 3;
-      column-gap: 20px;
+      gap: 20px;
     }
+  }
 
-    @media (min-width: t.$bp-desktop) {
-      columns: 4;
-      column-gap: 20px;
+  &__coluna {
+    flex: 1 1 0;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    @media (min-width: t.$bp-tablet) {
+      gap: 20px;
     }
   }
 
   &__item {
-    break-inside: avoid;
-    margin-bottom: 8px;
-    animation: galeriaEntrada 0.45s t.$transition-smooth both;
-
-    @media (min-width: t.$bp-tablet) {
-      margin-bottom: 20px;
-    }
+    animation: galeriaEntrada 0.45s ease both;
   }
 
   &__figura {
     position: relative;
     overflow: hidden;
-    border-radius: t.$radius-sm;
-    box-shadow: t.$shadow-card;
+    border-radius: 10px;
+    box-shadow: none;
     margin: 0;
     cursor: pointer;
     transition: box-shadow t.$transition-smooth;
@@ -126,6 +125,7 @@
     width: 100%;
     height: auto;
     display: block;
+    background-color: t.$color-bg-main; // placeholder enquanto carrega
     transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     object-fit: cover;
   }
@@ -207,36 +207,6 @@
 
     @media (min-width: t.$bp-tablet) {
       margin-top: t.$spacing-xl;
-    }
-  }
-
-  &__cta-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    font-family: t.$font-body;
-    font-size: 15px;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    text-decoration: none;
-    color: #fff;
-    background: t.$color-whatsapp;
-    border-radius: t.$radius-full;
-    padding: 16px 36px;
-    box-shadow: 0 6px 20px rgba(t.$color-whatsapp, 0.35);
-    transition:
-      background-color t.$transition-base,
-      box-shadow t.$transition-base,
-      transform t.$transition-base;
-
-    &:hover {
-      background: color.adjust(t.$color-whatsapp, $lightness: -6%);
-      box-shadow: 0 10px 28px rgba(t.$color-whatsapp, 0.45);
-      transform: translateY(-2px);
-    }
-
-    svg {
-      flex-shrink: 0;
     }
   }
 

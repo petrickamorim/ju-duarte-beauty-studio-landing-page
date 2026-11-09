@@ -2,6 +2,7 @@
 @use '../../../../styles' as t;
 
 .btn-whatsapp {
+  flex: 1 1 auto; // só tem efeito quando o host do componente é flex
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -42,5 +43,47 @@
 
   &__icon {
     flex-shrink: 0;
+  }
+
+  // ── Variantes do redesign ─────────────────────────────────────
+  &--escuro,
+  &--contraste {
+    gap: 10px;
+    min-height: 52px;
+    padding: 0 30px;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+
+    .btn-whatsapp__icon {
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  &--escuro {
+    background: t.$color-text-main;
+    color: #ffffff;
+    box-shadow: none;
+
+    .btn-whatsapp__icon {
+      color: t.$color-whatsapp;
+    }
+
+    &:hover,
+    &:focus-visible {
+      background: #4a3430;
+      box-shadow: 0 10px 24px rgba(t.$color-text-main, 0.18);
+    }
+  }
+
+  &--contraste {
+    color: #0b2e17;
+    box-shadow: none;
+
+    &:hover,
+    &:focus-visible {
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
+    }
   }
 }

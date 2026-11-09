@@ -5,11 +5,13 @@ import {
   gerarUrlWhatsApp,
 } from '../../dados/servicos-detalhe.dados';
 import { FormularioOrcamentoNoivaComponent } from '../../componentes/formulario-orcamento-noiva/formulario-orcamento-noiva';
+import { IconeComponent } from '../../../../shared/components/icone/icone';
+import { RolarParaDirective } from '../../../../shared/directives/rolar-para';
 
 @Component({
   selector: 'app-detalhe-servico',
   standalone: true,
-  imports: [RouterLink, FormularioOrcamentoNoivaComponent],
+  imports: [RouterLink, FormularioOrcamentoNoivaComponent, IconeComponent, RolarParaDirective],
   templateUrl: './detalhe-servico.html',
   styleUrl: './detalhe-servico.scss',
 })

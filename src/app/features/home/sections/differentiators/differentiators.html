@@ -1,26 +1,28 @@
 <section class="diff-section" id="diferenciais" aria-labelledby="diff-title">
   <div class="container">
-    <app-section-header
-      eyebrow="Por que escolher?"
-      title="Nossos Diferenciais"
-      subtitle="Compromisso com excelência em cada detalhe do atendimento."
-      id="diff-title"
-    />
+    <div class="diff-section__topo">
+      <app-section-header
+        eyebrow="Diferenciais"
+        title="Por que escolher o studio"
+        subtitle="Compromisso com excelência em cada detalhe do atendimento."
+        [centered]="false"
+        [refinado]="true"
+        id="diff-title"
+      />
+      <app-whatsapp-button
+        variante="escuro"
+        label="Quero agendar"
+        ariaLabel="Agendar serviço pelo WhatsApp"
+      />
+    </div>
 
     <ul class="diff-section__list" aria-label="Diferenciais do studio">
       @for (item of items(); track item.text) {
         <li class="diff-section__item">
-          <span class="diff-section__icon" aria-hidden="true">{{ item.icon }}</span>
+          <app-icone class="diff-section__icon" [nome]="item.icon" [tamanho]="24" [traco]="1.25" />
           <span class="diff-section__text">{{ item.text }}</span>
         </li>
       }
     </ul>
-
-    <div class="diff-section__cta">
-      <app-whatsapp-button
-        label="Quero Agendar Agora"
-        ariaLabel="Agendar serviço pelo WhatsApp"
-      />
-    </div>
   </div>
 </section>

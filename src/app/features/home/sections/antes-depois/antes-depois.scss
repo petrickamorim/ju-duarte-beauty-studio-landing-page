@@ -50,19 +50,26 @@
     cursor: col-resize;
     user-select: none;
     touch-action: none;
-    height: 280px;
-
-    @media (min-width: t.$bp-tablet) {
-      height: 360px;
-    }
-
-    @media (min-width: t.$bp-desktop) {
-      height: 420px;
-    }
+    // Proporção fixa (retrato): o enquadramento de cada foto é calibrado para 3:4,
+    // então antes e depois ficam alinhados em qualquer largura de tela
+    aspect-ratio: 3 / 4;
 
     &--arrastando {
       cursor: col-resize;
     }
+  }
+
+  // ── Enquadramento (antes e depois) ────────────────────────────
+  // Leva o ponto de foco da foto (--foco-*) até o alvo comum (--alvo-*) e aplica --zoom.
+  // Valores definidos por foto em antes-depois.ts.
+  &__imagem-depois,
+  &__imagem-antes {
+    transform-origin: var(--foco-x, 50%) var(--foco-y, 50%);
+    transform: translate(
+        calc(var(--alvo-x, 50%) - var(--foco-x, 50%)),
+        calc(var(--alvo-y, 50%) - var(--foco-y, 50%))
+      )
+      scale(var(--zoom, 1));
   }
 
   // ── Imagem Depois (base, ocupa todo o espaço) ─────────────────

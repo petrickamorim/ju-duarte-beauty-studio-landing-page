@@ -1,7 +1,11 @@
 import { Component, computed, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import { ReviewCardComponent } from '../../components/review-card/review-card';
 import { SectionHeaderComponent } from '../../../../shared/components/section-header/section-header';
-import { AVALIACOES } from '../../../../core/dados/avaliacoes.dados';
+import {
+  AVALIACOES,
+  GOOGLE_NOTA,
+  GOOGLE_TOTAL_AVALIACOES,
+} from '../../../../core/dados/avaliacoes.dados';
 
 const POR_PAGINA = 8;
 const DURACAO_MS = 25_000;
@@ -28,7 +32,8 @@ export class ReviewsComponent implements OnInit {
     return this.todas.slice(inicio, inicio + POR_PAGINA);
   });
 
-  readonly totalAvaliacoes = this.todas.length;
+  readonly totalAvaliacoes = GOOGLE_TOTAL_AVALIACOES;
+  readonly googleNota = GOOGLE_NOTA;
 
   ngOnInit(): void {
     const intervalo = setInterval(() => this.#avancar(), DURACAO_MS);

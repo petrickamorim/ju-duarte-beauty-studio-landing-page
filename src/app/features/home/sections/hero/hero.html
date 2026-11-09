@@ -1,74 +1,45 @@
-<section class="hero" aria-label="Apresentação do Ju Duarte Beauty Studio">
+<section class="hero" id="inicio" aria-labelledby="hero-titulo">
+  <!-- Conteúdo editorial -->
+  <div class="hero__content">
+    <p class="hero__eyebrow">Studio de beleza · São Paulo</p>
 
-  <!-- Coluna visual / imagem cinematográfica -->
-  <figure class="hero__figure" aria-hidden="true">
+    <h1 class="hero__headline" id="hero-titulo">
+      Beleza sofisticada para mulheres que valorizam <em>elegância</em>.
+    </h1>
+
+    <p class="hero__subheadline">
+      Maquiagem, penteado e unhas com atendimento personalizado, no studio ou a domicílio.
+    </p>
+
+    <div class="hero__ctas">
+      <app-whatsapp-button
+        [href]="whatsappUrl"
+        variante="escuro"
+        label="Agendar pelo WhatsApp"
+        ariaLabel="Agendar horário no Ju Duarte Beauty Studio pelo WhatsApp"
+      />
+      <a class="hero__btn-secundario" appRolarPara="servicos">Ver serviços</a>
+    </div>
+
+    <a class="hero__avaliacao" appRolarPara="avaliacoes">
+      <span class="hero__estrelas" role="img" [attr.aria-label]="'Nota ' + googleNota + ' de 5'"
+        >★★★★★</span
+      >
+      <span
+        ><strong>{{ googleNota }}</strong> · {{ googleTotal }} avaliações no Google</span
+      >
+    </a>
+  </div>
+
+  <!-- Foto -->
+  <figure class="hero__figure">
     <img
       class="hero__image"
       src="/imagens/hero/hero.jpeg"
-      sizes="(min-width: 1024px) 45vw, 100vw"
-      alt="Sessão editorial de beleza feminina — Ju Duarte Beauty Studio"
+      alt="Cliente com maquiagem e penteado feitos no Ju Duarte Beauty Studio"
       width="1400"
       height="1867"
       fetchpriority="high"
     />
-    <div class="hero__image-overlay" aria-hidden="true"></div>
   </figure>
-
-  <!-- Coluna de conteúdo editorial -->
-  <div class="hero__content">
-
-    <!-- Detalhe de canto decorativo — desktop only -->
-    <span class="hero__corner-ornament" aria-hidden="true"></span>
-
-    <!-- Eyebrow com linha vertical -->
-    <header class="hero__eyebrow-wrapper">
-      <span class="hero__eyebrow-line" aria-hidden="true"></span>
-      <p class="hero__eyebrow" aria-label="Beauty Studio">
-        <span aria-hidden="true">&#x2726;</span>&nbsp;&nbsp;Beauty Studio
-      </p>
-    </header>
-
-    <!-- Badge de avaliação -->
-    <div class="hero__badge" role="note" aria-label="Avaliação 5,0 com mais de 47 avaliações no Google">
-      <span aria-hidden="true">&#9733;</span>
-      <span>5,0 &middot; +47 avaliações Google</span>
-    </div>
-
-    <!-- Headline principal -->
-    <h1 class="hero__headline">
-      Beleza sofisticada<br />
-      para mulheres que<br />
-      valorizam <em class="hero__headline-em">elegância.</em>
-    </h1>
-
-    <!-- Subheadline -->
-    <p class="hero__subheadline">
-      Maquiagem, penteado e unhas premium com atendimento
-      personalizado em São Paulo.
-    </p>
-
-    <!-- CTAs -->
-    <div class="hero__ctas" role="group" aria-label="Ações principais">
-      <app-whatsapp-button
-        [href]="whatsappUrl"
-        label="Agendar Meu Horário"
-        ariaLabel="Agendar horário no Julia Duarte Beauty Studio pelo WhatsApp"
-      />
-      <a
-        class="hero__btn-secundario"
-        href="#servicos"
-        aria-label="Ver nossos serviços"
-      >
-        Ver Serviços
-      </a>
-    </div>
-
-    <!-- Scroll indicator — desktop only -->
-    <div class="hero__scroll-indicator" aria-hidden="true">
-      <span class="hero__scroll-text">Scroll</span>
-      <span class="hero__scroll-line"></span>
-    </div>
-
-  </div>
 </section>
-

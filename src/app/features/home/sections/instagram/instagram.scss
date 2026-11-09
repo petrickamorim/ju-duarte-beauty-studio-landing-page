@@ -1,7 +1,7 @@
 @use '../../../../../styles' as t;
 
 .instagram {
-  background: t.$color-bg-white;
+  background: t.$color-bg-main;
   padding: t.$spacing-xl t.$spacing-sm;
 
   @media (min-width: t.$bp-tablet) {

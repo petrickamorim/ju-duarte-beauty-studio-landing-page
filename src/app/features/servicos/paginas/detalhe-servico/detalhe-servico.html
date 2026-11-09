@@ -1,7 +1,7 @@
 @if (servico(); as s) {
   <div class="detalhe-servico">
     <div class="container">
-      <a class="detalhe-servico__voltar" routerLink="/" fragment="servicos" aria-label="Voltar para serviços">
+      <a class="detalhe-servico__voltar" appRolarPara="servicos" aria-label="Voltar para serviços">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
           <path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
@@ -9,7 +9,9 @@
       </a>
 
       <header class="detalhe-servico__cabecalho">
-        <span class="detalhe-servico__icone" aria-hidden="true">{{ s.icone }}</span>
+        <span class="detalhe-servico__icone">
+          <app-icone [nome]="s.icone" [tamanho]="40" [traco]="1.1" />
+        </span>
         <h1 class="detalhe-servico__titulo">{{ s.nome }}</h1>
         <p class="detalhe-servico__tagline">{{ s.tagline }}</p>
       </header>

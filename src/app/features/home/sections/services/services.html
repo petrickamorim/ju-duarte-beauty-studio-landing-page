@@ -1,17 +1,21 @@
 <section class="services-section" id="servicos" aria-labelledby="services-title">
   <div class="container">
-    <app-section-header
-      eyebrow="O Que Oferecemos"
-      title="Nossos Serviços"
-      subtitle="Técnicas premium para realçar a sua beleza em cada ocasião especial."
-      id="services-title"
-    />
+    <div class="services-section__topo">
+      <app-section-header
+        eyebrow="Serviços"
+        title="Cuidado em cada detalhe, do teste ao grande dia"
+        [centered]="false"
+        [refinado]="true"
+        id="services-title"
+      />
+      <p class="services-section__intro">
+        Cada atendimento é planejado para o seu estilo, a ocasião e o tempo que você tem.
+      </p>
+    </div>
 
     <div class="services-section__grid" role="list">
-      @for (service of services(); track service.name) {
-        <div role="listitem">
-          <app-service-card [service]="service" />
-        </div>
+      @for (service of services(); track service.slug; let i = $index) {
+        <app-service-card role="listitem" [service]="service" [posicao]="i + 1" />
       }
     </div>
   </div>

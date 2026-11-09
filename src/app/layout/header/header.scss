@@ -1,0 +1,247 @@
+@use '../../../styles' as t;
+
+$altura: 72px;
+
+:host {
+  display: block;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.header {
+  background: rgba(t.$color-bg-alt, 0.94);
+  backdrop-filter: saturate(1.2) blur(8px);
+  -webkit-backdrop-filter: saturate(1.2) blur(8px);
+  border-bottom: 1px solid t.$color-line;
+
+  &__container {
+    position: relative;
+    max-width: 1200px;
+    height: $altura;
+    margin: 0 auto;
+    padding: 0 t.$spacing-sm;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+
+    @media (min-width: t.$bp-tablet) {
+      padding: 0 t.$spacing-lg;
+    }
+  }
+
+  // ── Logo ──────────────────────────────────────────────────────
+  &__logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: t.$color-text-main;
+    flex-shrink: 0;
+  }
+
+  // Monograma JD (mesmo desenho do favicon)
+  &__logo-img {
+    display: block;
+    width: auto;
+    height: 40px;
+  }
+
+  &__logo-texto {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+    padding-left: 12px;
+    border-left: 1px solid t.$color-line;
+  }
+
+  &__logo-nome {
+    font-family: t.$font-title;
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+  }
+
+  &__logo-sub {
+    margin-top: 4px;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: t.$color-text-secondary;
+  }
+
+  // ── Navegação ─────────────────────────────────────────────────
+  // Mobile: painel que desce abaixo da barra; desktop: links em linha
+  &__nav {
+    position: absolute;
+    top: $altura;
+    left: 0;
+    right: 0;
+    background: t.$color-bg-alt;
+    border-bottom: 1px solid t.$color-line;
+    box-shadow: 0 16px 32px rgba(t.$color-text-main, 0.08);
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-8px);
+    transition:
+      opacity 0.2s ease,
+      transform 0.2s ease,
+      visibility 0.2s;
+
+    &--aberto {
+      visibility: visible;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (min-width: t.$bp-desktop) {
+      position: static;
+      background: none;
+      border: none;
+      box-shadow: none;
+      visibility: visible;
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  &__lista {
+    display: flex;
+    flex-direction: column;
+    padding: 8px t.$spacing-sm 16px;
+
+    @media (min-width: t.$bp-desktop) {
+      flex-direction: row;
+      gap: 28px;
+      padding: 0;
+    }
+  }
+
+  &__link {
+    display: flex;
+    align-items: center;
+    min-height: 48px;
+    font-size: 15px;
+    font-weight: 500;
+    color: t.$color-text-main;
+    border-bottom: 1px solid t.$color-line;
+    transition: color t.$transition-base;
+
+    @media (min-width: t.$bp-desktop) {
+      position: relative;
+      min-height: 44px;
+      font-size: 13px;
+      letter-spacing: 0.04em;
+      border-bottom: none;
+
+      // Sublinhado fino que cresce no hover
+      &::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 10px;
+        width: 100%;
+        height: 1px;
+        background: t.$color-primary-ink;
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform t.$transition-base;
+      }
+
+      &:hover::after {
+        transform: scaleX(1);
+      }
+    }
+
+    &:hover {
+      color: t.$color-primary-ink;
+    }
+  }
+
+  li:last-child .header__link {
+    border-bottom: none;
+  }
+
+  // ── Ações (CTA + botão de menu) ──────────────────────────────
+  &__acoes {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  &__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
+    padding: 0 20px;
+    background: t.$color-text-main;
+    color: #ffffff;
+    border-radius: t.$radius-full;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    transition: background-color t.$transition-base;
+
+    &:hover,
+    &:focus-visible {
+      background: #4a3430;
+    }
+
+    // Celular estreito: só o ícone (o aria-label do link continua descrevendo a ação)
+    @media (max-width: #{t.$bp-mobile - 1px}) {
+      width: 44px;
+      padding: 0;
+      justify-content: center;
+    }
+  }
+
+  &__cta-texto {
+    @media (max-width: #{t.$bp-mobile - 1px}) {
+      display: none;
+    }
+  }
+
+  &__cta-icone {
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+    fill: t.$color-whatsapp;
+
+    @media (max-width: #{t.$bp-mobile - 1px}) {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  &__menu-btn {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    width: 44px;
+    height: 44px;
+
+    @media (min-width: t.$bp-desktop) {
+      display: none;
+    }
+  }
+
+  &__menu-barra {
+    display: block;
+    width: 22px;
+    height: 1.5px;
+    background: t.$color-text-main;
+    transition: transform 0.2s ease;
+
+    &--x1 {
+      transform: translateY(3.75px) rotate(45deg);
+    }
+
+    &--x2 {
+      transform: translateY(-3.75px) rotate(-45deg);
+    }
+  }
+}

@@ -1,9 +1,8 @@
 <footer class="footer" role="contentinfo">
   <div class="footer__container">
-    <div class="footer__brand">
-      <p class="footer__logo">Ju Duarte Beauty Studio</p>
-      <p class="footer__tagline">Beleza, sofisticação e cuidado em cada detalhe.</p>
-    </div>
+    <a class="footer__logo" href="/" aria-label="Ju Duarte Beauty Studio — início">
+      Ju Duarte <span>Beauty Studio</span>
+    </a>
 
     <nav class="footer__links" aria-label="Links do rodapé">
       <a
@@ -12,25 +11,21 @@
         rel="noopener noreferrer"
         class="footer__link"
         aria-label="Visitar nosso Instagram"
+        >{{ instagramHandle }}</a
       >
-        <span aria-hidden="true">📸</span> {{ instagramHandle }}
-      </a>
       <a
         [href]="whatsappUrl"
         target="_blank"
         rel="noopener noreferrer"
         class="footer__link"
         aria-label="Entrar em contato pelo WhatsApp"
+        >{{ phone }}</a
       >
-        <span aria-hidden="true">📱</span> {{ phone }}
-      </a>
     </nav>
 
-    <p class="footer__copy">
-      &copy; {{ currentYear }} Ju Duarte Beauty Studio. Todos os direitos reservados.
-    </p>
-    <p class="footer__dev">
-      Desenvolvido por <strong>Petrick Amorim</strong>
-    </p>
+    <div class="footer__legal">
+      <p>&copy; {{ currentYear }} Ju Duarte Beauty Studio · São Paulo – SP</p>
+      <p class="footer__dev">Desenvolvido por <strong>Petrick Amorim</strong></p>
+    </div>
   </div>
 </footer>

@@ -1,15 +1,14 @@
 import {
   Component,
   DestroyRef,
-  ElementRef,
   HostListener,
   afterNextRender,
   computed,
-  effect,
   inject,
   signal,
 } from '@angular/core';
 import { SectionHeaderComponent } from '../../../../shared/components/section-header/section-header';
+import { WhatsappButtonComponent } from '../../../../shared/components/whatsapp-button/whatsapp-button';
 import { WHATSAPP_URL } from '../../../../core/constants/contact.constants';
 
 type Categoria = 'Todas' | 'Unhas' | 'Maquiagem' | 'Penteados';
@@ -24,35 +23,115 @@ interface FotoGaleria {
 
 const FOTOS: readonly FotoGaleria[] = [
   // Unhas — 4 fotos
-  { src: '/imagens/galeria/unhas/unha01.jpeg', categoria: 'Unhas', alt: 'Unhas em gel com acabamento impecável', largura: 400, altura: 480 },
-  { src: '/imagens/galeria/unhas/unha02.jpeg', categoria: 'Unhas', alt: 'Esmaltação em gel com design elegante', largura: 400, altura: 540 },
-  { src: '/imagens/galeria/unhas/unha03.jpeg', categoria: 'Unhas', alt: 'Alongamento em gel natural e resistente', largura: 400, altura: 400 },
-  { src: '/imagens/galeria/unhas/unha04.jpeg', categoria: 'Unhas', alt: 'Blindagem em gel com acabamento sofisticado', largura: 400, altura: 600 },
+  {
+    src: '/imagens/galeria/unhas/unha01.jpeg',
+    categoria: 'Unhas',
+    alt: 'Unhas em gel com acabamento impecável',
+    largura: 400,
+    altura: 480,
+  },
+  {
+    src: '/imagens/galeria/unhas/unha02.jpeg',
+    categoria: 'Unhas',
+    alt: 'Esmaltação em gel com design elegante',
+    largura: 400,
+    altura: 540,
+  },
+  {
+    src: '/imagens/galeria/unhas/unha03.jpeg',
+    categoria: 'Unhas',
+    alt: 'Alongamento em gel natural e resistente',
+    largura: 400,
+    altura: 400,
+  },
+  {
+    src: '/imagens/galeria/unhas/unha04.jpeg',
+    categoria: 'Unhas',
+    alt: 'Blindagem em gel com acabamento sofisticado',
+    largura: 400,
+    altura: 600,
+  },
 
   // Maquiagem — 4 fotos
-  { src: '/imagens/galeria/maquiagem/maquiagem01.jpeg', categoria: 'Maquiagem', alt: 'Maquiagem social elegante para evento', largura: 400, altura: 520 },
-  { src: '/imagens/galeria/maquiagem/maquiagem02.jpeg', categoria: 'Maquiagem', alt: 'Make glamourosa com acabamento impecável', largura: 400, altura: 460 },
-  { src: '/imagens/galeria/maquiagem/maquiagem03.jpeg', categoria: 'Maquiagem', alt: 'Maquiagem natural iluminada para fotos', largura: 400, altura: 580 },
-  { src: '/imagens/galeria/maquiagem/maquiagem04.jpeg', categoria: 'Maquiagem', alt: 'Produção completa de maquiagem profissional', largura: 400, altura: 420 },
+  {
+    src: '/imagens/galeria/maquiagem/maquiagem01.jpeg',
+    categoria: 'Maquiagem',
+    alt: 'Maquiagem social elegante para evento',
+    largura: 400,
+    altura: 520,
+  },
+  {
+    src: '/imagens/galeria/maquiagem/maquiagem02.jpeg',
+    categoria: 'Maquiagem',
+    alt: 'Make glamourosa com acabamento impecável',
+    largura: 400,
+    altura: 460,
+  },
+  {
+    src: '/imagens/galeria/maquiagem/maquiagem03.jpeg',
+    categoria: 'Maquiagem',
+    alt: 'Maquiagem natural iluminada para fotos',
+    largura: 400,
+    altura: 580,
+  },
+  {
+    src: '/imagens/galeria/maquiagem/maquiagem04.jpeg',
+    categoria: 'Maquiagem',
+    alt: 'Produção completa de maquiagem profissional',
+    largura: 400,
+    altura: 420,
+  },
 
   // Penteados — 4 fotos
-  { src: '/imagens/galeria/penteados/penteado01.jpeg', categoria: 'Penteados', alt: 'Penteado elaborado para evento especial', largura: 400, altura: 545 },
-  { src: '/imagens/galeria/penteados/penteado02.jpeg', categoria: 'Penteados', alt: 'Coque sofisticado com acabamento perfeito', largura: 400, altura: 440 },
-  { src: '/imagens/galeria/penteados/penteado03.jpeg', categoria: 'Penteados', alt: 'Penteado elegante para ocasião especial', largura: 400, altura: 500 },
-  { src: '/imagens/galeria/penteados/penteado04.jpeg', categoria: 'Penteados', alt: 'Penteado exclusivo com acabamento premium', largura: 400, altura: 480 },
+  {
+    src: '/imagens/galeria/penteados/penteado01.jpeg',
+    categoria: 'Penteados',
+    alt: 'Penteado elaborado para evento especial',
+    largura: 400,
+    altura: 545,
+  },
+  {
+    src: '/imagens/galeria/penteados/penteado02.jpeg',
+    categoria: 'Penteados',
+    alt: 'Coque sofisticado com acabamento perfeito',
+    largura: 400,
+    altura: 440,
+  },
+  {
+    src: '/imagens/galeria/penteados/penteado03.jpeg',
+    categoria: 'Penteados',
+    alt: 'Penteado elegante para ocasião especial',
+    largura: 400,
+    altura: 500,
+  },
+  {
+    src: '/imagens/galeria/penteados/penteado04.jpeg',
+    categoria: 'Penteados',
+    alt: 'Penteado exclusivo com acabamento premium',
+    largura: 400,
+    altura: 480,
+  },
 ];
+
+interface ItemGaleria {
+  readonly foto: FotoGaleria;
+  /** Índice da foto na lista filtrada (usado pelo lightbox e pelo toque) */
+  readonly indice: number;
+}
+
+// Breakpoints espelham $bp-tablet / $bp-desktop do styles.scss
+const MQ_TABLET = '(min-width: 768px)';
+const MQ_DESKTOP = '(min-width: 1024px)';
 
 @Component({
   selector: 'app-galeria',
   standalone: true,
-  imports: [SectionHeaderComponent],
+  imports: [SectionHeaderComponent, WhatsappButtonComponent],
   templateUrl: './galeria.html',
   styleUrl: './galeria.scss',
 })
 export class GaleriaComponent {
-  private readonly el = inject(ElementRef) as ElementRef<HTMLElement>;
   private readonly destroyRef = inject(DestroyRef);
-  private observer: IntersectionObserver | null = null;
 
   readonly whatsappUrl = WHATSAPP_URL;
   readonly whatsappMessage = encodeURIComponent('Olá, gostaria de agendar um horário!');
@@ -64,6 +143,28 @@ export class GaleriaComponent {
     return ativa === 'Todas' ? FOTOS : FOTOS.filter((f) => f.categoria === ativa);
   });
 
+  /** Nº de colunas do masonry — 2 mobile, 3 tablet, 4 desktop */
+  readonly qtdColunas = signal(2);
+
+  /**
+   * Masonry com colunas explícitas (estilo Pinterest): cada foto vai para a
+   * coluna mais baixa. Substitui o `columns` do CSS, que no mobile (Safari/iOS)
+   * deixava fotos sem pintar (brancas) até receberem um toque.
+   */
+  readonly colunas = computed<ItemGaleria[][]>(() => {
+    const qtd = this.qtdColunas();
+    const colunas: ItemGaleria[][] = Array.from({ length: qtd }, () => []);
+    const alturas = new Array<number>(qtd).fill(0);
+
+    this.fotosFiltradas().forEach((foto, indice) => {
+      const destino = alturas.indexOf(Math.min(...alturas));
+      colunas[destino].push({ foto, indice });
+      alturas[destino] += foto.altura / foto.largura;
+    });
+
+    return colunas;
+  });
+
   readonly lightboxAberto = signal(false);
   readonly fotoAtiva = signal<FotoGaleria | null>(null);
   readonly indiceAtivo = signal(0);
@@ -72,39 +173,24 @@ export class GaleriaComponent {
   private timeoutToque: ReturnType<typeof setTimeout> | null = null;
 
   constructor() {
-    afterNextRender(() => this.#iniciarObserver());
+    afterNextRender(() => this.#observarBreakpoints());
+  }
 
-    // Re-observa itens quando o filtro muda (DOM é atualizado após o signal)
-    effect(() => {
-      this.fotosFiltradas(); // lê para registrar dependência
-      setTimeout(() => this.#observarItens(), 50);
+  #observarBreakpoints(): void {
+    if (typeof window === 'undefined' || !window.matchMedia) return;
+
+    const tablet = window.matchMedia(MQ_TABLET);
+    const desktop = window.matchMedia(MQ_DESKTOP);
+    const atualizar = () => this.qtdColunas.set(desktop.matches ? 4 : tablet.matches ? 3 : 2);
+
+    atualizar();
+    tablet.addEventListener('change', atualizar);
+    desktop.addEventListener('change', atualizar);
+
+    this.destroyRef.onDestroy(() => {
+      tablet.removeEventListener('change', atualizar);
+      desktop.removeEventListener('change', atualizar);
     });
-
-    this.destroyRef.onDestroy(() => this.observer?.disconnect());
-  }
-
-  #iniciarObserver(): void {
-    if (typeof IntersectionObserver === 'undefined') return;
-
-    this.observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('galeria__item--visivel');
-            this.observer?.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.15 },
-    );
-
-    this.#observarItens();
-  }
-
-  #observarItens(): void {
-    if (!this.observer) return;
-    const itens = this.el.nativeElement.querySelectorAll('.galeria__item:not(.galeria__item--visivel)');
-    itens.forEach((item) => this.observer!.observe(item));
   }
 
   selecionarCategoria(categoria: Categoria): void {
@@ -145,13 +231,21 @@ export class GaleriaComponent {
   }
 
   @HostListener('document:keydown.escape')
-  onEscape(): void { if (this.lightboxAberto()) this.fecharLightbox(); }
+  onEscape(): void {
+    if (this.lightboxAberto()) this.fecharLightbox();
+  }
 
   @HostListener('document:keydown.arrowleft')
-  onArrowLeft(): void { if (this.lightboxAberto()) this.navegarLightbox(-1); }
+  onArrowLeft(): void {
+    if (this.lightboxAberto()) this.navegarLightbox(-1);
+  }
 
   @HostListener('document:keydown.arrowright')
-  onArrowRight(): void { if (this.lightboxAberto()) this.navegarLightbox(1); }
+  onArrowRight(): void {
+    if (this.lightboxAberto()) this.navegarLightbox(1);
+  }
 
-  imagemUrl(foto: FotoGaleria): string { return foto.src; }
+  imagemUrl(foto: FotoGaleria): string {
+    return foto.src;
+  }
 }

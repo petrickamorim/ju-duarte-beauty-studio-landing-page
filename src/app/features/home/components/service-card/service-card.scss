@@ -1,91 +1,153 @@
 @use '../../../../../styles' as t;
 
+// Nº de faixas do card: topo, título, descrição, "Inclui" + lista, link
+$faixas: 5;
+
+// O host e o card herdam as linhas da grade de serviços (subgrid):
+// títulos, descrições e listas ficam na mesma altura em todos os cards.
+:host {
+  display: grid;
+  grid-row: span $faixas;
+  grid-template-rows: subgrid;
+  row-gap: 0;
+}
+
 .service-card {
+  display: grid;
+  grid-row: span $faixas;
+  grid-template-rows: subgrid;
+  row-gap: 0;
+  padding: 28px 26px 30px;
   background: t.$color-bg-white;
-  padding: t.$spacing-md;
-  border-radius: t.$radius-md;
-  box-shadow: t.$shadow-card;
+  border: 1px solid t.$color-line;
+  border-radius: 12px;
   text-align: left;
   transition:
     transform t.$transition-smooth,
-    box-shadow t.$transition-smooth;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
+    box-shadow t.$transition-smooth,
+    border-color t.$transition-smooth;
 
   &:hover {
-    transform: translateY(-4px);
-    box-shadow: t.$shadow-card-hover;
+    transform: translateY(-3px);
+    border-color: #e6d3ca;
+    box-shadow: 0 18px 40px rgba(t.$color-text-main, 0.08);
   }
 
-  &__icon {
-    font-size: 36px;
-    margin-bottom: t.$spacing-sm;
-    line-height: 1;
+  // ── 1. Ícone + número ─────────────────────────────────────────
+  &__topo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
   }
 
-  &__title {
+  &__icone-wrap {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: rgba(t.$color-primary, 0.1);
+    color: t.$color-primary-ink;
+  }
+
+  &__numero {
     font-family: t.$font-title;
-    font-size: 22px;
-    font-weight: 700;
-    color: t.$color-text-main;
-    margin-bottom: 10px;
+    font-style: italic;
+    font-size: 15px;
+    color: t.$color-text-light;
   }
 
+  // ── 2. Título ────────────────────────────────────────────────
+  &__title {
+    align-self: end;
+    margin: 0 0 10px;
+    font-family: t.$font-title;
+    font-size: 23px;
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: -0.005em;
+    color: t.$color-text-main;
+    text-wrap: balance;
+  }
+
+  // ── 3. Descrição ────────────────────────────────────────────
   &__description {
-    font-size: 15px;
+    margin: 0 0 22px;
+    font-size: 14px;
     line-height: 1.65;
     color: t.$color-text-secondary;
-    margin-bottom: 14px;
+    text-wrap: pretty;
+  }
+
+  // ── 4. "Inclui" + lista ─────────────────────────────────────
+  &__inclui {
+    padding-top: 20px;
+    border-top: 1px solid #f3e8e2;
+  }
+
+  &__inclui-rotulo {
+    margin: 0 0 12px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: t.$color-primary-ink;
   }
 
   &__list {
-    margin-top: auto;
-    padding-left: 0;
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 9px;
   }
 
   &__list-item {
-    font-size: 14px;
-    color: t.$color-text-secondary;
-    padding-left: 18px;
     position: relative;
+    padding-left: 16px;
+    font-size: 13.5px;
+    line-height: 1.45;
+    color: t.$color-text-main;
 
+    // Marcador: pequeno losango rosé
     &::before {
       content: '';
       position: absolute;
-      left: 0;
-      top: 8px;
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
+      left: 1px;
+      top: 0.5em;
+      width: 5px;
+      height: 5px;
       background: t.$color-primary;
+      transform: rotate(45deg);
     }
   }
 
+  // ── 5. Link (só serviços com página de orçamento) ───────────
   &__cta {
-    display: inline-block;
-    margin-top: t.$spacing-md;
-    padding: 10px 24px;
-    border-radius: t.$radius-full;
-    border: 2px solid t.$color-primary;
-    color: t.$color-primary;
-    font-family: t.$font-body;
-    font-size: 14px;
+    align-self: end;
+    justify-self: start;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 44px;
+    margin-top: 18px;
+    font-size: 13px;
     font-weight: 600;
-    letter-spacing: 0.04em;
-    text-align: center;
-    transition:
-      background-color t.$transition-base,
-      color t.$transition-base;
-    align-self: flex-start;
+    letter-spacing: 0.03em;
+    color: t.$color-primary-ink;
+    transition: color t.$transition-base;
+
+    span {
+      transition: transform t.$transition-base;
+    }
 
     &:hover,
     &:focus-visible {
-      background-color: t.$color-primary;
-      color: t.$color-bg-white;
+      color: #7d3350;
+
+      span {
+        transform: translateX(3px);
+      }
     }
   }
 }

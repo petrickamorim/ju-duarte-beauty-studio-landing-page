@@ -1,18 +1,16 @@
 <section class="faq" id="faq" aria-labelledby="faq-titulo">
   <div class="container">
     <app-section-header
-      eyebrow="Dúvidas Frequentes"
-      title="Perguntas Frequentes"
+      eyebrow="Dúvidas"
+      title="Perguntas frequentes"
       subtitle="Tire suas dúvidas antes de agendar. Não encontrou o que procura? Fale comigo pelo WhatsApp."
+      [refinado]="true"
       id="faq-titulo"
     />
 
     <dl class="faq__lista">
       @for (item of perguntas; track item.pergunta; let i = $index) {
-        <div
-          class="faq__item"
-          [class.faq__item--aberto]="abertaIndice() === i"
-        >
+        <div class="faq__item" [class.faq__item--aberto]="abertaIndice() === i">
           <dt>
             <button
               class="faq__pergunta"
@@ -24,7 +22,13 @@
               <span>{{ item.pergunta }}</span>
               <span class="faq__icone" aria-hidden="true">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                  <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path
+                    d="M6 9l6 6 6-6"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
                 </svg>
               </span>
             </button>

@@ -1,9 +1,10 @@
 import { WHATSAPP_NUMBER } from '../../../core/constants/contact.constants';
+import { IconeNome } from '../../../shared/components/icone/icone';
 
 export interface ServicoDetalhe {
   readonly slug: string;
   readonly nome: string;
-  readonly icone: string;
+  readonly icone: IconeNome;
   readonly tagline: string;
   readonly descricao: string;
   readonly itens: readonly {
@@ -21,7 +22,7 @@ export const SERVICOS_DETALHE: readonly ServicoDetalhe[] = [
   {
     slug: 'maquiagem',
     nome: 'Maquiagem',
-    icone: '💄',
+    icone: 'maquiagem',
     tagline: 'Realce a sua beleza para cada ocasião especial',
     descricao:
       'Maquiagem profissional com técnicas modernas e produtos de alta qualidade, pensada para durar e fotografar bem. Cada atendimento é personalizado de acordo com o seu tom de pele, estilo e evento.',
@@ -55,10 +56,10 @@ export const SERVICOS_DETALHE: readonly ServicoDetalhe[] = [
   {
     slug: 'noivas',
     nome: 'Noivas & Debutantes',
-    icone: '👰',
+    icone: 'noiva',
     tagline: 'O maior dia da sua vida merece um cuidado único e exclusivo',
     descricao:
-      'Atendimento completo e personalizado para noivas e debutantes. Com planejamento detalhado, teste incluído e toda a atenção que o grande momento exige — do casamento à festa de 15 anos, você estará em mãos experientes e carinhosas.',
+      'Atendimento completo e personalizado para noivas e debutantes. A gente planeja cada detalhe com você, faz o teste antes e cuida de tudo com muito carinho, seja no seu casamento ou na sua festa de 15 anos.',
     itens: [
       {
         titulo: 'Pacote Completo Make + Penteado',
@@ -90,7 +91,7 @@ export const SERVICOS_DETALHE: readonly ServicoDetalhe[] = [
   {
     slug: 'penteado',
     nome: 'Penteado',
-    icone: '💇‍♀️',
+    icone: 'penteado',
     tagline: 'Penteados que completam a sua produção com elegância',
     descricao:
       'Penteados profissionais para todos os tipos de eventos e ocasiões. Técnicas modernas e clássicas combinadas para criar o visual perfeito, do coque mais elaborado ao semi-preso descomplicado.',
@@ -124,7 +125,7 @@ export const SERVICOS_DETALHE: readonly ServicoDetalhe[] = [
   {
     slug: 'unhas-em-gel',
     nome: 'Unhas em Gel',
-    icone: '💅',
+    icone: 'unhas',
     tagline: 'Unhas impecáveis com acabamento duradouro e delicado',
     descricao:
       'Procedimentos de unhas com técnicas modernas em gel, proporcionando durabilidade, beleza e acabamento impecável. Atendimento personalizado para cada formato, comprimento e estilo.',

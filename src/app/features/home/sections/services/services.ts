@@ -15,9 +15,9 @@ export class ServicesComponent {
     {
       slug: 'noivas',
       name: 'Noivas & Debutantes',
-      icon: '👰',
+      icon: 'noiva',
       description:
-        'Atendimento completo para o grande dia — casamentos e festas de 15 anos com sofisticação e cuidado.',
+        'Atendimento completo para casamentos e festas de 15 anos, com teste antes e muito cuidado no grande dia.',
       highlights: [
         'Pacote completo make + penteado',
         'Teste de noiva ou debutante incluído',
@@ -28,7 +28,7 @@ export class ServicesComponent {
     {
       slug: 'maquiagem',
       name: 'Maquiagem',
-      icon: '💄',
+      icon: 'maquiagem',
       description:
         'Maquiagem profissional para eventos, fotos, formaturas, madrinhas, convidadas e noivas.',
       highlights: [
@@ -41,7 +41,7 @@ export class ServicesComponent {
     {
       slug: 'penteado',
       name: 'Penteado',
-      icon: '💇‍♀️',
+      icon: 'penteado',
       description: 'Penteados para eventos, noivas, madrinhas e ocasiões especiais.',
       highlights: [
         'Penteados sociais e para festas',
@@ -52,7 +52,7 @@ export class ServicesComponent {
     {
       slug: 'unhas-em-gel',
       name: 'Unhas em Gel',
-      icon: '💅',
+      icon: 'unhas',
       description: 'Procedimentos com acabamento delicado, moderno e resistente.',
       highlights: [
         'Alongamento em gel',

@@ -36,7 +36,7 @@ const PERGUNTAS: readonly Pergunta[] = [
   {
     pergunta: 'Faz teste de noiva?',
     resposta:
-      'Sim! O teste de noiva é fundamental e já está incluído no pacote. Ele é realizado com antecedência para definirmos juntas o look ideal — maquiagem, penteado e todos os detalhes para o grande dia.',
+      'Sim! O teste de noiva é fundamental e já está incluído no pacote. Ele é realizado com antecedência para definirmos juntas o look ideal: maquiagem, penteado e todos os detalhes para o grande dia.',
   },
 ];
 

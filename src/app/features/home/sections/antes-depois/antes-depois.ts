@@ -9,6 +9,19 @@ import { SectionHeaderComponent } from '../../../../shared/components/section-he
 import { WhatsappButtonComponent } from '../../../../shared/components/whatsapp-button/whatsapp-button';
 import { WHATSAPP_URL } from '../../../../core/constants/contact.constants';
 
+/**
+ * Enquadramento de uma foto dentro do quadro 3:4 (valores em % do quadro,
+ * medidos com a foto em `object-fit: cover`, sem zoom).
+ * O ponto de foco (x, y) é levado até o `alvo` do item e ampliado por `zoom`,
+ * para que o rosto/mão fique na MESMA posição e tamanho no antes e no depois.
+ * Regra para não sobrar faixa vazia: zoom ≥ alvo/foco e ≥ (100−alvo)/(100−foco), em x e em y.
+ */
+interface Enquadramento {
+  readonly x: number;
+  readonly y: number;
+  readonly zoom: number;
+}
+
 interface TransformacaoItem {
   readonly titulo: string;
   readonly servico: string;
@@ -16,6 +29,10 @@ interface TransformacaoItem {
   readonly imagemDepois: string;
   readonly altAntes: string;
   readonly altDepois: string;
+  /** Onde o foco das duas fotos deve ficar no quadro (%) */
+  readonly alvo: { readonly x: number; readonly y: number };
+  readonly enquadramentoAntes: Enquadramento;
+  readonly enquadramentoDepois: Enquadramento;
 }
 
 const TRANSFORMACOES: readonly TransformacaoItem[] = [
@@ -26,6 +43,9 @@ const TRANSFORMACOES: readonly TransformacaoItem[] = [
     imagemDepois: '/imagens/antes-depois/ad-maquiagemSocial/depois_maquiagemSocial.jpeg',
     altAntes: 'Antes da maquiagem social profissional',
     altDepois: 'Maquiagem social elegante finalizada com perfeição',
+    alvo: { x: 55, y: 55 },
+    enquadramentoAntes: { x: 51, y: 60, zoom: 1.15 },
+    enquadramentoDepois: { x: 59.6, y: 45, zoom: 1.46 },
   },
   {
     titulo: 'Unhas em Gel',
@@ -34,6 +54,9 @@ const TRANSFORMACOES: readonly TransformacaoItem[] = [
     imagemDepois: '/imagens/antes-depois/ad-unha/depois_unha.jpeg',
     altAntes: 'Unhas naturais antes do procedimento em gel',
     altDepois: 'Unhas em gel alongadas com acabamento impecável',
+    alvo: { x: 48, y: 53 },
+    enquadramentoAntes: { x: 48, y: 53, zoom: 1 },
+    enquadramentoDepois: { x: 48, y: 53, zoom: 1 },
   },
   {
     titulo: 'Make Completa',
@@ -42,8 +65,25 @@ const TRANSFORMACOES: readonly TransformacaoItem[] = [
     imagemDepois: '/imagens/antes-depois/ad-maquiagemSocial02/depois_maquiagemSocial02.jpeg',
     altAntes: 'Antes da produção completa de maquiagem',
     altDepois: 'Produção completa de maquiagem com resultado impecável',
+    alvo: { x: 50, y: 45 },
+    enquadramentoAntes: { x: 46, y: 51.4, zoom: 1.58 },
+    enquadramentoDepois: { x: 51, y: 47.5, zoom: 1.05 },
   },
 ];
+
+/** Variáveis CSS consumidas por `.antes-depois__imagem-*` no SCSS */
+function estiloEnquadramento(
+  e: Enquadramento,
+  alvo: TransformacaoItem['alvo'],
+): Record<string, string> {
+  return {
+    '--foco-x': `${e.x}%`,
+    '--foco-y': `${e.y}%`,
+    '--alvo-x': `${alvo.x}%`,
+    '--alvo-y': `${alvo.y}%`,
+    '--zoom': `${e.zoom}`,
+  };
+}
 
 @Component({
   selector: 'app-antes-depois',
@@ -144,4 +184,6 @@ export class AntesDepoisComponent {
   imagemUrl(path: string): string {
     return path;
   }
+
+  readonly estiloEnquadramento = estiloEnquadramento;
 }

@@ -1,62 +1,42 @@
-<section class="cta-final" aria-labelledby="cta-final-titulo">
-  <!-- Elemento decorativo: pétalas de fundo em CSS puro -->
-  <div class="cta-final__decoracao" aria-hidden="true">
-    <span class="cta-final__petala cta-final__petala--1"></span>
-    <span class="cta-final__petala cta-final__petala--2"></span>
-    <span class="cta-final__petala cta-final__petala--3"></span>
-    <span class="cta-final__petala cta-final__petala--4"></span>
-    <span class="cta-final__linha cta-final__linha--esq"></span>
-    <span class="cta-final__linha cta-final__linha--dir"></span>
-  </div>
-
+<section class="cta-final" id="contato" aria-labelledby="cta-final-titulo">
   <div class="container">
     <div class="cta-final__conteudo">
-      <p class="cta-final__eyebrow">Agende Agora</p>
-
+      <p class="cta-final__eyebrow">Agenda aberta</p>
       <h2 class="cta-final__titulo" id="cta-final-titulo">
-        Pronta para se sentir<br />
-        <em>incrível?</em>
+        Pronta para se sentir <em>incrível</em>?
       </h2>
-
       <p class="cta-final__subtitulo">
-        Agende agora e garanta sua vaga.<br class="cta-final__br" />
-        Atendimento exclusivo, resultado impecável.
+        Fale com a Júlia pelo WhatsApp e reserve seu horário. Resposta geralmente em minutos.
       </p>
 
       <div class="cta-final__acoes">
         <app-whatsapp-button
           [href]="whatsappMessage"
-          label="Agendar Meu Horário"
+          variante="contraste"
+          label="Agendar meu horário"
           ariaLabel="Agendar horário pelo WhatsApp"
         />
-
-        <p class="cta-final__nota">
-          Resposta rápida — geralmente em minutos
-        </p>
+        <a
+          class="cta-final__maps-btn"
+          [href]="mapsUrl"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Ver como chegar ao studio no Google Maps"
+        >
+          <app-icone nome="pin" [tamanho]="18" />
+          Como chegar
+        </a>
       </div>
 
-      <div class="cta-final__selos">
-        <span class="cta-final__selo">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="16" height="16" aria-hidden="true" focusable="false">
-            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
-          </svg>
-          Sem taxas extras
-        </span>
-        <span class="cta-final__separador" aria-hidden="true">·</span>
-        <span class="cta-final__selo">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="16" height="16" aria-hidden="true" focusable="false">
-            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
-          </svg>
-          Atendimento personalizado
-        </span>
-        <span class="cta-final__separador" aria-hidden="true">·</span>
-        <span class="cta-final__selo">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="16" height="16" aria-hidden="true" focusable="false">
-            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
-          </svg>
-          Parcelamento disponível
-        </span>
-      </div>
+      <address class="cta-final__endereco">
+        <app-icone class="cta-final__endereco-icone" nome="pin" [tamanho]="16" />
+        {{ endereco }}
+      </address>
+
+      <p class="cta-final__selos">
+        Sem taxas extras <span aria-hidden="true">·</span> Atendimento personalizado
+        <span aria-hidden="true">·</span> Parcelamento em até 3x
+      </p>
     </div>
   </div>
 </section>

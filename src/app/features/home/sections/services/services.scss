@@ -2,23 +2,50 @@
 
 .services-section {
   background: t.$color-bg-alt;
-  padding: t.$spacing-xl t.$spacing-sm;
+  padding: 72px 0;
 
   @media (min-width: t.$bp-tablet) {
-    padding: t.$spacing-2xl t.$spacing-sm;
+    padding: 112px 0;
+  }
+
+  &__topo {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 20px 32px;
+    margin-bottom: 40px;
+
+    @media (min-width: t.$bp-tablet) {
+      margin-bottom: 56px;
+    }
+
+    app-section-header {
+      max-width: 560px;
+    }
+  }
+
+  &__intro {
+    max-width: 380px;
+    font-size: 15px;
+    line-height: 1.7;
+    color: t.$color-text-secondary;
   }
 
   &__grid {
+    // Os cards usam subgrid: cada um ocupa 5 linhas desta grade,
+    // assim título, descrição e lista ficam alinhados lado a lado.
     display: grid;
     gap: 20px;
     grid-template-columns: 1fr;
 
     @media (min-width: t.$bp-mobile) {
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
-    @media (min-width: t.$bp-desktop) {
-      grid-template-columns: repeat(4, 1fr);
+    // 4 colunas só com largura suficiente para o texto respirar
+    @media (min-width: t.$bp-wide) {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
     }
   }
 }

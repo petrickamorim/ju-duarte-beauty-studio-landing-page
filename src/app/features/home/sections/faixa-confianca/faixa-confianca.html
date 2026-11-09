@@ -1,0 +1,10 @@
+<aside class="faixa-confianca" aria-label="Por que agendar com a gente">
+  <ul class="container faixa-confianca__lista">
+    @for (item of itens; track item.texto) {
+      <li class="faixa-confianca__item">
+        <app-icone class="faixa-confianca__icone" [nome]="item.icone" [tamanho]="18" />
+        {{ item.texto }}
+      </li>
+    }
+  </ul>
+</aside>

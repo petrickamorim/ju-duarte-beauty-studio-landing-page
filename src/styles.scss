@@ -6,6 +6,10 @@
 $color-primary: #d57f9d;
 $color-primary-light: #f5c8bd;
 $color-primary-dark: #b8607f;
+// Rosé profundo para TEXTO pequeno/links — o #d57f9d não atinge contraste 4.5:1 sobre fundo claro
+$color-primary-ink: #9c4566;
+$color-line: #efe2db; // bordas finas (estilo refinado)
+$color-star: #c98a1e;
 
 $color-bg-main: #f8efe9;
 $color-bg-alt: #fffaf7;

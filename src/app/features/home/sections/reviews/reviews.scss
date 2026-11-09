@@ -1,30 +1,87 @@
 @use '../../../../../styles' as t;
 
 .reviews-section {
-  background: t.$color-bg-main;
-  padding: t.$spacing-xl t.$spacing-sm;
+  background: t.$color-bg-alt;
+  padding: 72px 0;
 
   @media (min-width: t.$bp-tablet) {
-    padding: t.$spacing-2xl t.$spacing-sm;
+    padding: 112px 0;
+  }
+
+  // Título à esquerda, resumo da nota à direita
+  &__topo {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 28px 32px;
+    margin-bottom: 40px;
+
+    @media (min-width: t.$bp-tablet) {
+      margin-bottom: 48px;
+    }
+  }
+
+  &__summary {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 16px 24px;
+    background: t.$color-bg-white;
+    border: 1px solid t.$color-line;
+    border-radius: 12px;
+  }
+
+  &__rating {
+    font-family: t.$font-title;
+    font-size: 44px;
+    font-weight: 500;
+    line-height: 1;
+    color: t.$color-text-main;
+  }
+
+  &__summary-info {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  &__stars {
+    color: t.$color-star;
+    font-size: 15px;
+    letter-spacing: 2px;
+    line-height: 1;
+  }
+
+  &__count {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: t.$color-text-secondary;
   }
 
   &__grid {
     display: grid;
-    gap: 18px;
+    gap: 20px;
     grid-template-columns: 1fr;
     opacity: 1;
     transition: opacity 350ms ease;
 
     @media (min-width: t.$bp-mobile) {
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
     @media (min-width: t.$bp-tablet) {
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 
     @media (min-width: t.$bp-desktop) {
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    > div {
+      display: flex;
     }
 
     &--saindo {
@@ -35,56 +92,41 @@
   &__dots {
     display: flex;
     justify-content: center;
-    gap: 8px;
-    margin-top: t.$spacing-lg;
+    gap: 4px;
+    margin-top: 40px;
   }
 
+  // Área de toque de 24px com o "dot" desenhado no centro
   &__dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: t.$color-border;
-    cursor: pointer;
-    border: none;
+    position: relative;
+    width: 24px;
+    height: 24px;
     padding: 0;
-    transition:
-      background-color t.$transition-base,
-      transform t.$transition-base,
-      width t.$transition-base;
+    border: none;
+    background: transparent;
+    cursor: pointer;
 
-    &--ativo {
-      background: t.$color-primary;
-      width: 24px;
-      border-radius: 4px;
+    &::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 8px;
+      height: 2px;
+      transform: translate(-50%, -50%);
+      background: t.$color-border;
+      transition:
+        background-color t.$transition-base,
+        width t.$transition-base;
     }
 
-    &:hover:not(&--ativo) {
-      background: t.$color-primary-light;
+    &:hover::before {
+      background: t.$color-text-light;
     }
-  }
 
-  &__summary {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    margin-top: t.$spacing-lg;
-    padding: 14px 28px;
-    background: t.$color-bg-white;
-    border-radius: t.$radius-full;
-    border: 1px solid t.$color-border;
-    width: fit-content;
-    margin-inline: auto;
-  }
-
-  &__rating {
-    font-size: 17px;
-    font-weight: 700;
-    color: t.$color-text-main;
-  }
-
-  &__count {
-    font-size: 14px;
-    color: t.$color-text-secondary;
+    &--ativo::before {
+      width: 20px;
+      background: t.$color-text-main;
+    }
   }
 }

@@ -11,6 +11,8 @@ import { WHATSAPP_URL } from '../../../core/constants/contact.constants';
       rel="noopener noreferrer"
       class="btn-whatsapp"
       [class.btn-whatsapp--full]="fullWidth()"
+      [class.btn-whatsapp--escuro]="variante() === 'escuro'"
+      [class.btn-whatsapp--contraste]="variante() === 'contraste'"
       [attr.aria-label]="ariaLabel()"
     >
       <svg
@@ -37,4 +39,10 @@ export class WhatsappButtonComponent {
   readonly label = input<string>('Agendar Meu Horário');
   readonly fullWidth = input<boolean>(false);
   readonly ariaLabel = input<string>('Agendar horário pelo WhatsApp');
+  /**
+   * padrao: verde com texto branco (visual original)
+   * escuro: chocolate com ícone verde (redesign, fundos claros)
+   * contraste: verde com texto escuro (redesign, fundos escuros)
+   */
+  readonly variante = input<'padrao' | 'escuro' | 'contraste'>('padrao');
 }
