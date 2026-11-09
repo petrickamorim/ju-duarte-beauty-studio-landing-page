@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { SeoService } from '../../../../core/seo/seo.service';
 import { HeroComponent } from '../../sections/hero/hero';
 import { FaixaConfiancaComponent } from '../../sections/faixa-confianca/faixa-confianca';
 import { ReviewsComponent } from '../../sections/reviews/reviews';
@@ -41,4 +42,9 @@ import { CtaFinalComponent } from '../../sections/cta-final/cta-final';
     </main>
   `,
 })
-export class HomePageComponent {}
+export class HomePageComponent {
+  constructor() {
+    // Ao voltar de uma página de serviço, restaura título, canonical e og:url da home
+    inject(SeoService).definirHome();
+  }
+}

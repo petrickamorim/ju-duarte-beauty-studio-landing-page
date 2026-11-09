@@ -41,6 +41,23 @@ jobs:
           # SPA: o Pages devolve o 404.html em rotas como /servicos/noivas — com o app
           # completo dentro, a rota abre direto (mesmo comportamento do deploy anterior)
           cp index.html 404.html
+
+          # Uma página HTML por serviço (servicos/<slug>.html — o Pages serve em
+          # /servicos/<slug> sem redirecionar): responde 200 em vez de 404 e já sai com
+          # canonical e og:url da própria página — para buscadores e para prévias de link
+          # (WhatsApp, Instagram, Facebook), que não executam o app.
+          # Os slugs vêm dos dados do site, então um serviço novo entra automaticamente.
+          SITE=https://juduartebeautystudio.com
+          mkdir -p servicos
+          for slug in $(grep -oP "slug: '\K[^']+" "$GITHUB_WORKSPACE/src/app/features/servicos/dados/servicos-detalhe.dados.ts"); do
+            sed -e "s#<link rel=\"canonical\" href=\"$SITE/\">#<link rel=\"canonical\" href=\"$SITE/servicos/$slug\">#" \
+                -e "s#<meta property=\"og:url\" content=\"$SITE/\">#<meta property=\"og:url\" content=\"$SITE/servicos/$slug\">#" \
+                index.html > "servicos/$slug.html"
+            grep -q "href=\"$SITE/servicos/$slug\"" "servicos/$slug.html" \
+              || { echo "::error::canonical não foi trocado em servicos/$slug"; exit 1; }
+            echo "Gerado servicos/$slug.html"
+          done
+
           # Evita que o Pages processe os arquivos com Jekyll
           touch .nojekyll
           # Garante que os arquivos essenciais estão no artefato
